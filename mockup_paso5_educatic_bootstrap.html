@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Paso 5 – Documentación Requerida | EDUCATIC</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+      body{background:#f8fafc}
+      .stepbar {height: 6px; background:#e9ecef; border-radius: 999px; overflow:hidden}
+      .stepbar > div {height:100%; width:83.3%; background:#0d6efd}
+      .sticky-header{position:sticky; top:0; z-index:1030; background:white; box-shadow: 0 1px 0 rgba(0,0,0,.06);}
+      .icon-required::after{content:" *"; color:#dc3545}
+      .badge-dot{display:inline-flex; align-items:center; gap:.35rem}
+      .badge-dot::before{content:""; width:.55rem; height:.55rem; border-radius:50%}
+      .dot-ok::before{background:#198754}
+      .dot-warn::before{background:#ffc107}
+      .dot-pend::before{background:#6c757d}
+      .dot-bad::before{background:#dc3545}
+      .table td, .table th{vertical-align: middle;}
+      .uploader input[type="file"]{padding:.5rem}
+      .small-muted{font-size:.9rem; color:#6c757d}
+      .lock{opacity:.7; pointer-events:none}
+    </style>
+</head>
+<body>
+<header class="sticky-header">
+<div class="container py-3">
+<div class="d-flex align-items-center justify-content-between">
+<div>
+<h1 class="h5 mb-1">Proceso de Inscripción – EDUCATIC</h1>
+<div class="small text-secondary">Paso 5 de 6 · Documentación requerida</div>
+</div>
+<span class="text-success d-none" id="stepCheck">✓ Completado</span>
+</div>
+<div aria-hidden="true" class="stepbar mt-3">
+<div id="progressFill"></div>
+</div>
+</div>
+
+      <div id="guidanceBanner" class="border-top border-bottom bg-light">
+        <div class="container py-2 small d-flex align-items-center gap-2" aria-live="polite">
+          <i class="bi bi-compass"></i>
+          <span>Paso 5 – Documentación Requerida · Carga tus documentos y asegúrate de cumplir con los requisitos. Entre más completos estén, más ágil será tu proceso.</span>
+        </div>
+      </div>
+
+</header>
+
+<main class="container my-4">
+<div class="alert alert-info">
+        Sube los documentos solicitados. Los marcados como <strong>obligatorios</strong> deben quedar <strong>validados</strong> (verde) para continuar.
+      </div>
+<div class="card shadow-sm mb-3">
+<div class="card-body">
+<div class="d-flex flex-wrap gap-3 small">
+<span class="badge bg-light text-dark badge-dot dot-pend">Pendiente</span>
+<span class="badge bg-light text-dark badge-dot dot-warn">En revisión</span>
+<span class="badge bg-light text-dark badge-dot dot-ok">Validado</span>
+<span class="badge bg-light text-dark badge-dot dot-bad">Rechazado</span>
+</div>
+</div>
+</div>
+<form id="formPaso5" novalidate="">
+<div class="table-responsive">
+<table class="table align-middle" id="tablaDocs">
+<thead>
+<tr>
+<th style="min-width:220px;">Documento</th>
+<th>Descripción</th>
+<th>Obligatorio</th>
+<th style="min-width:140px;">Estado</th>
+<th style="min-width:240px;">Archivo</th>
+<th style="min-width:220px;">Acción</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+<!--
+<div class="d-flex justify-content-end gap-2 my-4">
+<a class="btn btn-outline-secondary" href="mockup_paso4_educatic_bootstrap.html" id="btnAtras">Atrás</a>
+<button class="btn btn-success" disabled="" id="btnSiguiente" type="submit">Siguiente</button>
+</div>
+-->
+	    <div class="d-flex justify-content-between align-items-center mt-4">
+            <a class="btn btn-outline-secondary" href="mockup_paso4_educatic_bootstrap.html">Atrás</a>
+            <a class="btn btn-primary" href="mockup_paso6_educatic_bootstrap.html">Siguiente</a>
+          </div>
+
+
+</form>
+</main>
+
+    <footer class="disclaimer py-4 border-top">
+      <div class="container">
+        <div class="small text-muted mb-2">
+          <strong>Disclaimer:</strong> Este prototipo forma parte del modelo en la nube de EDUCATIC, disponible bajo modalidad SaaS.
+          Su modernización tecnológica está incluida para los clientes con contrato vigente de soporte e infraestructura,
+          lo que les permite acceder a la última versión sin costos adicionales de actualización.
+        </div>
+        <div class="small text-end">2025© Todos los Derechos Reservados</div>
+        <div class="text-end mt-1">
+          <img src="https://clientes.educatic.com.co/sao/images/allrights.png" alt="" border="0" style="height:16px;">
+        </div>
+      </div>
+    </footer>
+	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+      // Progreso - paso 5
+      document.getElementById('progressFill').style.width = '83.3%';
+      const stepCheck = document.getElementById('stepCheck');
+      const tbody = document.querySelector('#tablaDocs tbody');
+      const btnContinuar = document.getElementById('btnContinuar');
+
+      // Configuración de documentos
+      const documentos = [
+        {id:'docId', nombre:'Documento de identidad', desc:'Cédula de ciudadanía o documento equivalente por ambas caras.', obligatorio:true},
+        {id:'actaTitulo', nombre:'Acta o Título de bachiller', desc:'Acta de grado o diploma de bachiller.', obligatorio:true},
+        {id:'icfes', nombre:'Resultado ICFES', desc:'Si lo cargaste en el paso anterior se valida automáticamente; aquí puedes adjuntarlo.', obligatorio:false},
+        {id:'foto', nombre:'Foto tipo documento', desc:'Fondo blanco, reciente, formato JPG o PNG.', obligatorio:true},
+        {id:'eps', nombre:'Certificado EPS/Seguro', desc:'Certificado de afiliación vigente.', obligatorio:false},
+        {id:'certNotas', nombre:'Certificados académicos', desc:'Aplicable para transferencias: certificados de notas de estudios previos.', obligatorio:false},
+      ];
+
+      // Estado por id
+      const estados = {}; // { id: 'pendiente' | 'revision' | 'validado' | 'rechazado' }
+      const archivos = {}; // { id: File }
+      const comentarios = {}; // { id: 'texto' }
+
+      function badgeEstado(estado){
+        const map = {
+          'pendiente': {cls:'dot-pend', txt:'Pendiente'},
+          'revision' : {cls:'dot-warn', txt:'En revisión'},
+          'validado' : {cls:'dot-ok',   txt:'Validado'},
+          'rechazado': {cls:'dot-bad',  txt:'Rechazado'}
+        };
+        const {cls, txt} = map[estado] || map['pendiente'];
+        return `<span class="badge bg-light text-dark badge-dot ${cls}">${txt}</span>`;
+      }
+
+      function render(){
+        tbody.innerHTML = '';
+        documentos.forEach(doc => {
+          const estado = estados[doc.id] || 'pendiente';
+          const locked = estado === 'validado';
+          const tr = document.createElement('tr');
+          tr.dataset.id = doc.id;
+          tr.innerHTML = `
+            <td><strong>${doc.nombre}</strong></td>
+            <td class="small-muted">${doc.desc}</td>
+            <td>${doc.obligatorio ? '<span class="badge bg-danger-subtle text-danger-emphasis">Obligatorio</span>' : '<span class="badge bg-secondary-subtle text-secondary-emphasis">Opcional</span>'}</td>
+            <td class="estado-cell">${badgeEstado(estado)}</td>
+            <td class="uploader ${locked ? 'lock' : ''}">
+              <input type="file" class="form-control file-input" accept=".pdf,.jpg,.jpeg,.png" ${locked ? 'disabled' : ''}>
+              <div class="form-text">PDF/JPG/PNG · Máx 5MB</div>
+              <div class="invalid-feedback">Archivo inválido o supera 5MB.</div>
+            </td>
+            <td>
+              <div class="d-flex flex-column gap-2">
+                <div class="${locked ? 'lock' : ''}">
+                  <button type="button" class="btn btn-primary btn-sm w-100 btn-enviar" ${locked ? 'disabled' : ''}>Enviar a revisión</button>
+                </div>
+                <!-- Controles de simulación para demo -->
+                <div class="d-flex gap-2 align-items-center">
+                  <select class="form-select form-select-sm sel-sim" aria-label="Simular resultado">
+                    <option selected disabled>Simular revisión...</option>
+                    <option value="validado">Marcar Validado</option>
+                    <option value="rechazado">Marcar Rechazado</option>
+                  </select>
+                  <button type="button" class="btn btn-outline-secondary btn-sm btn-aplicar">Aplicar</button>
+                </div>
+                <div class="comentarios ${estado==='rechazado' ? '' : 'd-none'}">
+                  <label class="form-label small">Comentarios del validador</label>
+                  <textarea class="form-control form-control-sm area-com" rows="2" placeholder="Ej: Foto con fondo no uniforme, por favor volver a cargar.">${comentarios[doc.id] || ''}</textarea>
+                </div>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        wireEvents();
+        validarContinuar();
+      }
+
+      function wireEvents(){
+        // change file -> validar tamaño/tipo
+        tbody.querySelectorAll('.file-input').forEach(inp => {
+          inp.addEventListener('change', (e)=>{
+            const tr = e.target.closest('tr');
+            const id = tr.dataset.id;
+            const file = e.target.files[0];
+            if (!file){ archivos[id] = null; return; }
+            const okType = /pdf|jpe?g|png$/i.test(file.type) || /\.(pdf|jpg|jpeg|png)$/i.test(file.name);
+            const okSize = file.size <= 5 * 1024 * 1024;
+            const ok = okType && okSize;
+            e.target.classList.toggle('is-invalid', !ok);
+            e.target.classList.toggle('is-valid', ok);
+            if (ok){ archivos[id] = file; } else { archivos[id] = null; }
+          });
+        });
+
+        // Enviar a revisión
+        tbody.querySelectorAll('.btn-enviar').forEach(btn => {
+          btn.addEventListener('click', (e)=>{
+            const tr = e.target.closest('tr');
+            const id = tr.dataset.id;
+            const fileInput = tr.querySelector('.file-input');
+            if (!fileInput.files || !fileInput.files[0] || fileInput.classList.contains('is-invalid')){
+              fileInput.classList.add('is-invalid');
+              return;
+            }
+            estados[id] = 'revision';
+            render();
+          });
+        });
+
+        // Simular revisión (solo demo)
+        tbody.querySelectorAll('.btn-aplicar').forEach(btn => {
+          btn.addEventListener('click', (e)=>{
+            const tr = e.target.closest('tr');
+            const id = tr.dataset.id;
+            const sel = tr.querySelector('.sel-sim');
+            const val = sel.value;
+            if (!val) return;
+            if (val === 'validado'){
+              estados[id] = 'validado';
+              comentarios[id] = '';
+            } else if (val === 'rechazado'){
+              estados[id] = 'rechazado';
+              // mostrar área de comentarios
+              tr.querySelector('.comentarios')?.classList.remove('d-none');
+              // ejemplo de comentario
+              comentarios[id] = comentarios[id] || 'Documento ilegible. Por favor cargar una versión más clara.';
+            }
+            render();
+          });
+        });
+
+        // Guardar comentarios de rechazo
+        tbody.querySelectorAll('.area-com').forEach(area => {
+          area.addEventListener('input', (e)=>{
+            const tr = e.target.closest('tr');
+            const id = tr.dataset.id;
+            comentarios[id] = e.target.value;
+          });
+        });
+      }
+
+      function validarContinuar(){
+        // Todos los obligatorios deben estar 'validado'
+        const faltantes = documentos.filter(d => d.obligatorio && estados[d.id] !== 'validado');
+        btnContinuar.disabled = faltantes.length > 0;
+        if (!btnContinuar.disabled){ stepCheck.classList.remove('d-none'); }
+      }
+
+      // Inicial
+      documentos.forEach(d => estados[d.id] = 'pendiente');
+      render();
+
+      // Bloquear envío real
+      document.getElementById('formPaso5').addEventListener('submit', (e)=>{
+        e.preventDefault();
+        validarContinuar();
+      });
+    </script>
+<script>
+(function() {
+  const btn = document.getElementById('btnSiguiente');
+  const form = document.getElementById('formPaso5') || document.querySelector('main form');
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!form || form.checkValidity()) {
+        window.location.href = 'mockup_paso6_educatic_bootstrap.html';
+      } else {
+        form.reportValidity?.();
+      }
+    });
+  }
+})();
+</script></body>
+</html>

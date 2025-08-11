@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Paso 4 – Información Académica | EDUCATIC</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+      body{background:#f8fafc}
+      .stepbar {height: 6px; background:#e9ecef; border-radius: 999px; overflow:hidden}
+      .stepbar > div {height:100%; width:66.6%; background:#0d6efd}
+      .sticky-header{position:sticky; top:0; z-index:1030; background:white; box-shadow: 0 1px 0 rgba(0,0,0,.06);}
+      .icon-required::after{content:" *"; color:#dc3545}
+      .btn-toggle .btn{min-width: 90px}
+      .uploader input[type="file"]{padding:.5rem}
+      .badge-dot{display:inline-flex; align-items:center; gap:.35rem}
+      .badge-dot::before{content:""; width:.55rem; height:.55rem; border-radius:50%}
+      .dot-ok::before{background:#198754}
+      .dot-close::before{background:#dc3545}
+      .dot-warn::before{background:#ffc107}
+      .grid-3 > [class*='col-']{display:grid; grid-template-rows:auto auto 44px; align-items:stretch}
+      .help{cursor:help; border-bottom: 1px dotted rgba(0,0,0,.25)}
+    </style>
+</head>
+<body>
+<header class="sticky-header">
+<div class="container py-3">
+<div class="d-flex align-items-center justify-content-between">
+<div>
+<h1 class="h5 mb-1">Proceso de Inscripción – EDUCATIC</h1>
+<div class="small text-secondary">Paso 4 de 6 · Información académica</div>
+</div>
+<span class="text-success d-none" id="stepCheck">✓ Completado</span>
+</div>
+<div aria-hidden="true" class="stepbar mt-3">
+<div id="progressFill"></div>
+</div>
+</div>
+      <div id="guidanceBanner" class="border-top border-bottom bg-light">
+        <div class="container py-2 small d-flex align-items-center gap-2" aria-live="polite">
+          <i class="bi bi-compass"></i>
+          <span>Paso 4 – Información Académica · Cuéntanos sobre tu trayectoria académica. Esto nos ayudará a ubicarte correctamente en el proceso de admisión.</span>
+        </div>
+      </div>
+</header>
+
+
+<main class="container my-4">
+<form id="formPaso4" novalidate="">
+<!-- Educación Media -->
+<section class="card shadow-sm mb-4">
+<div class="card-body">
+<h2 class="h5 mb-3">Educación Media (Bachillerato)</h2>
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label icon-required" for="emInstitucion">Última institución educativa</label>
+<input class="form-control" id="emInstitucion" required=""/>
+<div class="invalid-feedback">Requerido.</div>
+</div>
+<div class="col-md-3">
+<label class="form-label icon-required" for="emAnio">Año de finalización</label>
+<input class="form-control" id="emAnio" inputmode="numeric" pattern="\d{4}" placeholder="AAAA" required=""/>
+<div class="form-text">Ej: 2022</div>
+<div class="invalid-feedback">Ingresa un año válido (AAAA).</div>
+</div>
+<div class="col-md-3">
+<label class="form-label icon-required" for="emTitulo">Título obtenido</label>
+<select class="form-select" id="emTitulo" required="">
+<option disabled="" selected="" value="">Seleccionar...</option>
+<option>Bachiller Académico</option>
+<option>Bachiller Técnico</option>
+<option>Otro</option>
+</select>
+<div class="invalid-feedback">Selecciona una opción.</div>
+</div>
+</div>
+<div class="row g-3 mt-1 align-items-end">
+<div class="col-md-4">
+<label class="form-label" for="icfesCodigo">Código ICFES (opcional)</label>
+<input class="form-control" id="icfesCodigo" placeholder="Ej: AC123456"/>
+<div class="form-text">Si lo ingresas, intentaremos consultar tus resultados automáticamente.</div>
+</div>
+<div class="col-md-3">
+<button class="btn btn-outline-primary w-100" id="btnConsultarIcfes" type="button">Consultar ICFES</button>
+</div>
+<div class="col-md-5">
+<span class="badge bg-light text-dark badge-dot dot-warn d-none" id="icfesEstado">Pendiente de consulta</span>
+</div>
+</div>
+<div class="row g-3 mt-3 d-none" id="icfesResultados">
+<div class="col-md-3">
+<label class="form-label">Lectura crítica</label>
+<input class="form-control" id="icfesLectura" readonly="" value=""/>
+</div>
+<div class="col-md-3">
+<label class="form-label">Matemáticas</label>
+<input class="form-control" id="icfesMate" readonly="" value=""/>
+</div>
+<div class="col-md-3">
+<label class="form-label">Ciencias</label>
+<input class="form-control" id="icfesCiencias" readonly="" value=""/>
+</div>
+<div class="col-md-3">
+<label class="form-label">Inglés</label>
+<input class="form-control" id="icfesIngles" readonly="" value=""/>
+</div>
+</div>
+</div>
+</section>
+<!-- Estudios Superiores Previos -->
+<section class="card shadow-sm mb-4">
+<div class="card-body">
+<h2 class="h5 mb-3">Estudios superiores previos (si aplica)</h2>
+<div class="row g-3 align-items-center">
+<div class="col-md-6">
+<label class="form-label">¿Tienes estudios superiores previos?</label>
+<div class="btn-group btn-toggle" role="group">
+<input class="btn-check" id="supSi" name="supToggle" type="radio" value="Si"/>
+<label class="btn btn-outline-primary" for="supSi">Sí</label>
+<input checked="" class="btn-check" id="supNo" name="supToggle" type="radio" value="No"/>
+<label class="btn btn-outline-primary" for="supNo">No</label>
+</div>
+</div>
+</div>
+<div class="mt-3 d-none" id="supBlock">
+<!-- Registro 1 -->
+<div class="border rounded p-3 mb-3">
+<div class="row g-3">
+<div class="col-md-4">
+<label class="form-label icon-required" for="supInst1">Institución</label>
+<input class="form-control" id="supInst1"/>
+<div class="invalid-feedback">Requerido.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label icon-required" for="supProg1">Programa</label>
+<input class="form-control" id="supProg1"/>
+<div class="invalid-feedback">Requerido.</div>
+</div>
+<div class="col-md-2">
+<label class="form-label icon-required" for="supSems1">Semestres aprobados</label>
+<input class="form-control" id="supSems1" inputmode="numeric" pattern="\d{1,2}"/>
+<div class="invalid-feedback">1–12.</div>
+</div>
+<div class="col-md-2">
+<label class="form-label icon-required" for="supAnio1">Último año cursado</label>
+<input class="form-control" id="supAnio1" inputmode="numeric" pattern="\d{4}" placeholder="AAAA"/>
+<div class="invalid-feedback">Año (AAAA).</div>
+</div>
+<div class="col-md-6 uploader">
+<label class="form-label icon-required" for="supCert1">Certificado de notas</label>
+<input accept=".pdf,.jpg,.jpeg,.png" class="form-control" id="supCert1" type="file"/>
+<div class="form-text">PDF/JPG/PNG, máx. 5MB.</div>
+<div class="invalid-feedback">Adjunta el certificado.</div>
+</div>
+</div>
+</div>
+<!-- Registro 2 opcional -->
+<div class="border rounded p-3 mb-3 d-none" id="supRow2">
+<div class="row g-3">
+<div class="col-md-4">
+<label class="form-label" for="supInst2">Institución</label>
+<input class="form-control" id="supInst2"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="supProg2">Programa</label>
+<input class="form-control" id="supProg2"/>
+</div>
+<div class="col-md-2">
+<label class="form-label" for="supSems2">Semestres aprobados</label>
+<input class="form-control" id="supSems2" inputmode="numeric" pattern="\d{1,2}"/>
+</div>
+<div class="col-md-2">
+<label class="form-label" for="supAnio2">Último año cursado</label>
+<input class="form-control" id="supAnio2" inputmode="numeric" pattern="\d{4}" placeholder="AAAA"/>
+</div>
+<div class="col-md-6 uploader">
+<label class="form-label" for="supCert2">Certificado de notas</label>
+<input accept=".pdf,.jpg,.jpeg,.png" class="form-control" id="supCert2" type="file"/>
+<div class="form-text">PDF/JPG/PNG, máx. 5MB.</div>
+</div>
+</div>
+</div>
+<button class="btn btn-outline-secondary btn-sm" id="btnAgregarSup" type="button">Agregar otro</button>
+</div>
+</div>
+</section>
+<!-- Observaciones (opcional) -->
+<section class="card shadow-sm mb-4">
+<div class="card-body">
+<h2 class="h5 mb-3">Observaciones académicas (opcional)</h2>
+<textarea class="form-control" id="obsAcad" maxlength="300" placeholder="Ej: Homologaciones solicitadas, distinciones, becas..." rows="3"></textarea>
+</div>
+</section>
+<!--
+<div class="d-flex justify-content-end gap-2 mb-5">
+<a class="btn btn-outline-secondary" href="mockup_paso3_educatic_bootstrap.html" id="btnAtras">Atrás</a>
+<button class="btn btn-success" disabled="" id="btnSiguiente" type="submit">Siguiente</button>
+</div>
+-->
+	    <div class="d-flex justify-content-between align-items-center mt-4">
+            <a class="btn btn-outline-secondary" href="mockup_paso3_educatic_bootstrap.html">Atrás</a>
+            <a class="btn btn-primary" href="mockup_paso5_educatic_bootstrap.html">Siguiente</a>
+          </div>
+
+
+</form>
+</main>
+
+    <footer class="disclaimer py-4 border-top">
+      <div class="container">
+        <div class="small text-muted mb-2">
+          <strong>Disclaimer:</strong> Este prototipo forma parte del modelo en la nube de EDUCATIC, disponible bajo modalidad SaaS.
+          Su modernización tecnológica está incluida para los clientes con contrato vigente de soporte e infraestructura,
+          lo que les permite acceder a la última versión sin costos adicionales de actualización.
+        </div>
+        <div class="small text-end">2025© Todos los Derechos Reservados</div>
+        <div class="text-end mt-1">
+          <img src="https://clientes.educatic.com.co/sao/images/allrights.png" alt="" border="0" style="height:16px;">
+        </div>
+      </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+      // Progreso - paso 4
+      document.getElementById('progressFill').style.width = '66.6%';
+      const stepCheck = document.getElementById('stepCheck');
+      const form = document.getElementById('formPaso4');
+
+      // Validación on-blur
+      document.addEventListener('blur', function(e){
+        const el = e.target;
+        if (!el.closest('form')) return;
+        if (el.hasAttribute('required')){
+          el.classList.toggle('is-invalid', !el.checkValidity());
+          el.classList.toggle('is-valid', el.checkValidity());
+          validarContinuar();
+        }
+      }, true);
+
+      // ICFES demo
+      const btnConsultarIcfes = document.getElementById('btnConsultarIcfes');
+      const icfesCodigo = document.getElementById('icfesCodigo');
+      const icfesEstado = document.getElementById('icfesEstado');
+      const icfesResultados = document.getElementById('icfesResultados');
+      btnConsultarIcfes.addEventListener('click', () => {
+        const code = (icfesCodigo.value || '').trim();
+        if (!code){ 
+          icfesEstado.textContent = 'Ingresa un código para consultar';
+          icfesEstado.classList.remove('d-none'); 
+          icfesEstado.classList.remove('dot-ok','dot-close'); 
+          icfesEstado.classList.add('dot-warn'); 
+          return; 
+        }
+        // Simulación: si termina en número par => encontrado
+        const encontrado = /\d$/.test(code) ? parseInt(code.slice(-1),10) % 2 === 0 : true;
+        icfesEstado.classList.remove('d-none','dot-warn','dot-close','dot-ok');
+        if (encontrado){
+          icfesEstado.textContent = 'Resultados encontrados';
+          icfesEstado.classList.add('dot-ok');
+          icfesResultados.classList.remove('d-none');
+          document.getElementById('icfesLectura').value = '62';
+          document.getElementById('icfesMate').value = '58';
+          document.getElementById('icfesCiencias').value = '55';
+          document.getElementById('icfesIngles').value = 'B2';
+        } else {
+          icfesEstado.textContent = 'No se encontraron resultados';
+          icfesEstado.classList.add('dot-close');
+          icfesResultados.classList.add('d-none');
+        }
+      });
+
+      // Toggle estudios superiores
+      const supSi = document.getElementById('supSi');
+      const supNo = document.getElementById('supNo');
+      const supBlock = document.getElementById('supBlock');
+      function applySup(){
+        const show = supSi.checked;
+        supBlock.classList.toggle('d-none', !show);
+        const reqIds = ['supInst1','supProg1','supSems1','supAnio1','supCert1'];
+        reqIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (show){ el.setAttribute('required',''); }
+          else { el.removeAttribute('required'); el.classList.remove('is-invalid','is-valid'); if (el.type==='file'){ el.value=null; } else { el.value=''; } }
+        });
+        validarContinuar();
+      }
+      supSi.addEventListener('change', applySup);
+      supNo.addEventListener('change', applySup);
+      applySup();
+
+      // Agregar segundo bloque opcional
+      const btnAgregarSup = document.getElementById('btnAgregarSup');
+      const supRow2 = document.getElementById('supRow2');
+      btnAgregarSup.addEventListener('click', ()=>{
+        supRow2.classList.remove('d-none');
+        btnAgregarSup.disabled = true;
+      });
+
+      // Validación archivos (<=5MB)
+      function validarArchivo(input){
+        if (!input.files || !input.files[0]) return input.hasAttribute('required') ? false : true;
+        const ok = input.files[0].size <= 5 * 1024 * 1024;
+        input.classList.toggle('is-invalid', !ok);
+        input.classList.toggle('is-valid', ok);
+        return ok;
+      }
+      ['supCert1','supCert2'].forEach(id=>{
+        const el = document.getElementById(id);
+        if (el){ el.addEventListener('change', ()=>{ validarArchivo(el); validarContinuar(); }); }
+      });
+
+      // Continuar habilitado cuando todo válido
+      function validarContinuar(){
+        const requeridos = form.querySelectorAll('input[required], select[required]');
+        let ok = true;
+        requeridos.forEach(el => { if (!el.checkValidity()) ok = false; });
+        // Archivos obligatorios visibles
+        if (!validarArchivo(document.getElementById('supCert1'))) ok = false;
+        document.getElementById('btnSiguiente').disabled = !ok;
+        if (ok){ stepCheck.classList.remove('d-none'); }
+      }
+
+      validarContinuar();
+      });
+    
+// -- Navegación con botón Siguiente (si todo válido) --
+document.getElementById('btnSiguiente')?.addEventListener('click', (e)=>{
+  e.preventDefault();
+  // Reusar validarContinuar si existe; de lo contrario, validar requeridos
+  try {
+    if (typeof validarContinuar === 'function') validarContinuar();
+  } catch(err){}
+  const formEl = document.getElementById('formPaso4');
+  const ok = formEl ? formEl.checkValidity() : true;
+  if (ok){
+    window.location.href = 'mockup_paso5_educatic_bootstrap.html';
+  }
+});
+</script>
+<script>
+(function() {
+  const btn = document.getElementById('btnSiguiente');
+  const form = document.getElementById('formPaso4') || document.querySelector('main form');
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!form || form.checkValidity()) {
+        window.location.href = 'mockup_paso5_educatic_bootstrap.html';
+      } else {
+        form.reportValidity?.();
+      }
+    });
+  }
+})();
+</script></body>
+</html>

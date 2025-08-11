@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paso 3 – Información de Perfil Sociocultural</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+      body{background:#f8fafc}
+      .sticky-header{position:sticky; top:0; z-index:1030; background:#fff; box-shadow:0 1px 0 rgba(0,0,0,.06)}
+      .stepbar{height:6px; background:#e9ecef; border-radius:999px; overflow:hidden}
+      .stepbar>div{height:100%; width:50%; background:#0d6efd}
+      /* Banner del paso: igual a Paso 2 */
+      #guidanceBanner{position:sticky; top:64px; z-index:1028}
+      .icon-required::after{content:" *"; color:#dc3545}
+      .btn-toggle .btn{min-width: 90px}
+      .uploader input[type="file"]{padding:.5rem}
+      .is-valid ~ .valid-icon::after{content:"✓"; color:#198754; margin-left:.25rem}
+      }
+      footer.disclaimer{color:#6c757d}
+    </style>
+  </head>
+  <body>
+    <!-- Header + barra de progreso -->
+    <header class="sticky-header">
+      <div class="container py-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://www.educatic.com.co/assets/images/logo.png" height="80" alt="Logo de Educatic" style="width:auto;">
+            <div>
+              <h1 class="h5 mb-1">Proceso de Inscripción – EDUCATIC</h1>
+              <div class="small text-secondary">Paso 3 de 6 · Información de perfil</div>
+            </div>
+          </div>
+          <span class="text-success d-none" id="stepCheck">✓ Completado</span>
+        </div>
+        <div class="stepbar mt-3"><div id="progressFill"></div></div>
+      </div>
+      <div id="guidanceBanner" class="border-top border-bottom bg-light">
+        <div class="container py-2 small d-flex align-items-center gap-2" aria-live="polite">
+          <i class="bi bi-compass"></i>
+          <span>Paso 3 – Información de Perfil Sociocultural · Queremos conocerte mejor para brindarte apoyo y oportunidades ajustadas a ti. Completa esta información con confianza.</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container my-4">
+      <form id="formPaso3" novalidate>
+        <!-- Sociocultural -->
+        <section class="card shadow-sm mb-4">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Sociocultural – Datos culturales y territoriales</h2>
+
+            <!-- Grupo étnico -->
+            <div class="row g-3 align-items-center">
+              <div class="col-md-6">
+                <label class="form-label">¿Te autorreconoces con un grupo étnico?</label>
+                <div class="btn-group btn-toggle" role="group">
+                  <input type="radio" class="btn-check" name="ethToggle" id="ethSi" value="Si">
+                  <label class="btn btn-outline-primary" for="ethSi">Sí</label>
+                  <input type="radio" class="btn-check" name="ethToggle" id="ethNo" value="No" checked>
+                  <label class="btn btn-outline-primary" for="ethNo">No</label>
+                </div>
+                <div class="form-text">Si seleccionas “Sí”, adjunta el certificado correspondiente.</div>
+              </div>
+            </div>
+
+            <div id="ethBlock" class="row g-3 mt-1 d-none">
+              <div class="col-md-6">
+                <label class="form-label icon-required" for="grupoEtnico">Grupo étnico</label>
+                <select id="grupoEtnico" class="form-select">
+                  <option value="" selected disabled>Seleccionar...</option>
+                  <option>Pueblo indígena</option>
+                  <option>Afrodescendiente</option>
+                  <option>Raizal</option>
+                  <option>Palenquero</option>
+                  <option>Gitano (ROM)</option>
+                </select>
+                <div class="invalid-feedback">Selecciona una opción.</div>
+                <span class="valid-icon"></span>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="etnia">Etnia indígena (si aplica)</label>
+                <select id="etnia" class="form-select">
+                  <option value="" selected>Seleccionar...</option>
+                  <option>Wayuu</option>
+                  <option>Embera</option>
+                  <option>Nasa</option>
+                  <option>Misak</option>
+                </select>
+              </div>
+              <div class="col-md-6 uploader">
+                <label class="form-label icon-required" for="certEtnico">Certificado de grupo étnico</label>
+                <input type="file" id="certEtnico" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="form-text">PDF/JPG/PNG. Máx. 5MB.</div>
+                <div class="invalid-feedback">Adjunta el certificado.</div>
+                <span class="valid-icon"></span>
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- Víctima conflicto -->
+            <div class="row g-3 align-items-center">
+              <div class="col-md-6">
+                <label class="form-label">¿Te consideras víctima del conflicto armado?</label>
+                <div class="btn-group btn-toggle" role="group">
+                  <input type="radio" class="btn-check" name="vicToggle" id="vicSi" value="Si">
+                  <label class="btn btn-outline-primary" for="vicSi">Sí</label>
+                  <input type="radio" class="btn-check" name="vicToggle" id="vicNo" value="No" checked>
+                  <label class="btn btn-outline-primary" for="vicNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div id="vicBlock" class="row g-3 mt-1 d-none">
+              <div class="col-md-6 uploader">
+                <label class="form-label icon-required" for="certVictima">Certificado de víctima</label>
+                <input type="file" id="certVictima" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="form-text">PDF/JPG/PNG. Máx. 5MB.</div>
+                <div class="invalid-feedback">Adjunta el certificado.</div>
+                <span class="valid-icon"></span>
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- Discapacidad -->
+            <div class="row g-3 align-items-center">
+              <div class="col-md-6">
+                <label class="form-label">¿Te autorreconoces con una discapacidad?</label>
+                <div class="btn-group btn-toggle" role="group">
+                  <input type="radio" class="btn-check" name="discToggle" id="discSi" value="Si">
+                  <label class="btn btn-outline-primary" for="discSi">Sí</label>
+                  <input type="radio" class="btn-check" name="discToggle" id="discNo" value="No" checked>
+                  <label class="btn btn-outline-primary" for="discNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div id="discBlock" class="row g-3 mt-1 d-none">
+              <div class="col-md-6 uploader">
+                <label class="form-label icon-required" for="certDiscapacidad">Certificado de discapacidad</label>
+                <input type="file" id="certDiscapacidad" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="form-text">PDF/JPG/PNG. Máx. 5MB.</div>
+                <div class="invalid-feedback">Adjunta el certificado.</div>
+                <span class="valid-icon"></span>
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- Talento excepcional -->
+            <div class="row g-3 align-items-center">
+              <div class="col-md-6">
+                <label class="form-label">¿Te autorreconoces con alguna capacidad o talento excepcional?</label>
+                <div class="btn-group btn-toggle" role="group">
+                  <input type="radio" class="btn-check" name="talToggle" id="talSi" value="Si">
+                  <label class="btn btn-outline-primary" for="talSi">Sí</label>
+                  <input type="radio" class="btn-check" name="talToggle" id="talNo" value="No" checked>
+                  <label class="btn btn-outline-primary" for="talNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div id="talBlock" class="row g-3 mt-1 d-none">
+              <div class="col-md-8">
+                <label class="form-label icon-required" for="talDesc">Describe tu talento</label>
+                <textarea id="talDesc" class="form-control" rows="3" maxlength="600" placeholder="Ej: Olimpiadas de Matemáticas, medalla nacional de atletismo, intérprete musical con beca..."></textarea>
+                <div class="invalid-feedback">Por favor describe tu talento.</div>
+                <span class="valid-icon"></span>
+              </div>
+              <div class="col-md-4 uploader">
+                <label class="form-label" for="certTalento">Soporte (opcional)</label>
+                <input type="file" id="certTalento" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="form-text">Opcional: certificados, diplomas, etc.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contacto de emergencia -->
+        <section class="card shadow-sm mb-4">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Contacto de emergencia</h2>
+            <p class="small text-secondary">Usaremos esta información en caso de presentarse una emergencia médica.</p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label icon-required" for="emNombre">Nombre de contacto</label>
+                <input id="emNombre" class="form-control" placeholder="Ingresa el nombre completo" required>
+                <div class="invalid-feedback">Requerido.</div>
+                <span class="valid-icon"></span>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label icon-required" for="emTel">Teléfono</label>
+                <input id="emTel" class="form-control" inputmode="numeric" pattern="\d{7,10}" placeholder="Solo números (7–10)" required>
+                <div class="form-text">Fijo, 7–10 dígitos.</div>
+                <div class="invalid-feedback">Número no válido.</div>
+                <span class="valid-icon"></span>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label icon-required" for="emCel">Celular</label>
+                <input id="emCel" class="form-control" inputmode="numeric" pattern="\d{10}" placeholder="Solo números (10)" required>
+                <div class="form-text">10 dígitos.</div>
+                <div class="invalid-feedback">Número no válido.</div>
+                <span class="valid-icon"></span>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label icon-required" for="emParen">Parentesco</label>
+                <select id="emParen" class="form-select" required>
+                  <option value="" selected disabled>Seleccionar...</option>
+                  <option>Padre/Madre</option>
+                  <option>Hermano/a</option>
+                  <option>Cónyuge/Pareja</option>
+                  <option>Hijo/a</option>
+                  <option>Amigo/a</option>
+                  <option>Otro</option>
+                </select>
+                <div class="invalid-feedback">Selecciona una opción.</div>
+                <span class="valid-icon"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Botonera unificada --
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <a href="mockup_paso2_educatic_bootstrap.html" class="btn btn-outline-secondary" id="btnAtras">Atrás</a>
+          <button type="submit" class="btn btn-primary" id="btnSiguiente" disabled>Siguiente</button>
+        </div>
+		-->
+	    <div class="d-flex justify-content-between align-items-center mt-4">
+            <a class="btn btn-outline-secondary" href="mockup_paso2_educatic_bootstrap.html">Atrás</a>
+            <a class="btn btn-primary" href="mockup_paso4_educatic_bootstrap.html">Siguiente</a>
+          </div>
+		
+		
+		
+      </form>
+    </main>
+
+    <footer class="disclaimer py-4 border-top">
+      <div class="container">
+        <div class="small text-muted mb-2">
+          <strong>Disclaimer:</strong> Este prototipo forma parte del modelo en la nube de EDUCATIC, disponible bajo modalidad SaaS.
+          Su modernización tecnológica está incluida para los clientes con contrato vigente de soporte e infraestructura,
+          lo que les permite acceder a la última versión sin costos adicionales de actualización.
+        </div>
+        <div class="small text-end">2025© Todos los Derechos Reservados</div>
+        <div class="text-end mt-1">
+          <img src="https://clientes.educatic.com.co/sao/images/allrights.png" alt="" border="0" style="height:16px;">
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Progreso
+      document.getElementById('progressFill').style.width = '50%';
+      // Tooltips (por si agregamos data-bs-toggle="tooltip" en labels)
+      [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).forEach(function(el){ new bootstrap.Tooltip(el); });
+
+      const form = document.getElementById('formPaso3');
+      const stepCheck = document.getElementById('stepCheck');
+      const btnSiguiente = document.getElementById('btnSiguiente');
+
+      // Toggles -> mostrar/ocultar bloques y requeridos
+      function toggleBlock(radioYesId, radioNoId, blockId, requiredSelectors){
+        const yes = document.getElementById(radioYesId);
+        const no  = document.getElementById(radioNoId);
+        const block = document.getElementById(blockId);
+        function apply(){
+          const show = yes && yes.checked;
+          if (block) block.classList.toggle('d-none', !show);
+          (requiredSelectors||[]).forEach(sel => {
+            block.querySelectorAll(sel).forEach(el => {
+              if (show){ el.setAttribute('required',''); }
+              else { el.removeAttribute('required'); el.classList.remove('is-invalid','is-valid'); if (el.type==='file'){ el.value=null; } else { el.value=''; } }
+            });
+          });
+          validarGate();
+        }
+        if (yes) yes.addEventListener('change', apply);
+        if (no)  no.addEventListener('change', apply);
+        apply();
+      }
+      toggleBlock('ethSi','ethNo','ethBlock',['select','input[type="file"]']);
+      toggleBlock('vicSi','vicNo','vicBlock',['input[type="file"]']);
+      toggleBlock('discSi','discNo','discBlock',['input[type="file"]']);
+
+      // Talento: textarea requerido si “Sí”
+      (function(){
+        const yes = document.getElementById('talSi');
+        const no  = document.getElementById('talNo');
+        const block = document.getElementById('talBlock');
+        const area = document.getElementById('talDesc');
+        function apply(){
+          const show = yes && yes.checked;
+          if (block) block.classList.toggle('d-none', !show);
+          if (area){
+            if (show){ area.setAttribute('required',''); }
+            else { area.removeAttribute('required'); area.classList.remove('is-invalid','is-valid'); area.value = ''; }
+          }
+          validarGate();
+        }
+        if (yes) yes.addEventListener('change', apply);
+        if (no)  no.addEventListener('change', apply);
+        apply();
+      })();
+
+      // Validación on-blur + checkmark
+      document.addEventListener('blur', function(e){
+        const el = e.target;
+        if (!el.closest('form')) return;
+        if (el.hasAttribute('required')){
+          el.classList.toggle('is-invalid', !el.checkValidity());
+          el.classList.toggle('is-valid', el.checkValidity());
+          validarGate();
+        }
+      }, true);
+
+      // Solo números teléfono/celular + aprobación por longitud
+      function digitsOnly(e){
+        if (e.inputType === 'insertText' && !/[0-9]/.test(e.data||'')){
+          e.target.value = e.target.value.replace(/\D+/g,'');
+          e.preventDefault();
+        }
+      }
+      function wireNum(id, minL, maxL){
+        const inp = document.getElementById(id);
+        if (!inp) return;
+        inp.addEventListener('beforeinput', digitsOnly);
+        inp.addEventListener('input', ()=>{
+          const v = (inp.value||'').replace(/\D+/g,'');
+          const ok = v.length >= minL && v.length <= (maxL||minL);
+          inp.classList.toggle('is-invalid', !ok);
+          inp.classList.toggle('is-valid', ok);
+          validarGate();
+        });
+      }
+      wireNum('emTel',7,10);
+      wireNum('emCel',10,10);
+
+      // Archivos: tamaño máximo 5MB
+      function validarArchivo(input){
+        if (!input.files || !input.files[0]) return false;
+        const ok = input.files[0].size <= 5 * 1024 * 1024;
+        input.classList.toggle('is-invalid', !ok);
+        input.classList.toggle('is-valid', ok);
+        return ok;
+      }
+      ['certEtnico','certVictima','certDiscapacidad','certTalento'].forEach(id=>{
+        const el = document.getElementById(id);
+        if (el){
+          el.addEventListener('change', ()=>{ validarArchivo(el); validarGate(); });
+        }
+      });
+
+      function todosNo(){
+        return document.getElementById('ethNo').checked
+          && document.getElementById('vicNo').checked
+          && document.getElementById('discNo').checked
+          && document.getElementById('talNo').checked;
+      }
+      function contactoOK(){
+        return document.getElementById('emNombre').checkValidity()
+          && document.getElementById('emTel').checkValidity()
+          && document.getElementById('emCel').checkValidity()
+          && document.getElementById('emParen').checkValidity();
+      }
+      function visiblesOK(){
+        let ok = true;
+        if (!document.getElementById('ethBlock').classList.contains('d-none')){
+          ok = ok && document.getElementById('grupoEtnico').checkValidity() && validarArchivo(document.getElementById('certEtnico'));
+        }
+        if (!document.getElementById('vicBlock').classList.contains('d-none')){
+          ok = ok && validarArchivo(document.getElementById('certVictima'));
+        }
+        if (!document.getElementById('discBlock').classList.contains('d-none')){
+          ok = ok && validarArchivo(document.getElementById('certDiscapacidad'));
+        }
+        if (!document.getElementById('talBlock').classList.contains('d-none')){
+          ok = ok && document.getElementById('talDesc').checkValidity();
+        }
+        return ok;
+      }
+
+      function validarGate(){
+        const ok = (todosNo() && contactoOK()) || (!todosNo() && contactoOK() && visiblesOK());
+        btnSiguiente.disabled = !ok;
+        if (ok) stepCheck.classList.remove('d-none');
+      }
+
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        if (btnSiguiente.disabled) return;
+        window.location.href = 'mockup_paso4_educatic_bootstrap.html';
+      });
+    </script>
+  </body>
+</html>

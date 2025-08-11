@@ -1,0 +1,460 @@
+    <!doctype html>
+    <html lang="es">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Paso 2 – ¿Cuál es tu programa de interés?</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+        <style>
+          body{background:#f8fafc}
+          .sticky-header{position:sticky;top:0;z-index:1030;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+          .stepbar{height:6px;background:#e9ecef;border-radius:999px;overflow:hidden}
+          .stepbar>div{height:100%;width:33.3%;background:#0d6efd}
+          #guidanceBanner{position:sticky;top:64px;z-index:1028}
+          .card-ghost{background:#fcfcfd;border-color:#eef1f4}
+          .table-light td{background:#fbfcfd}
+          .badge-soft{background:#eef4ff;color:#0d6efd}
+          .icon-required::after{content:" *";color:#dc3545}
+          footer.disclaimer{color:#6c757d}
+          #changeNotice{display:none;opacity:0;transition:opacity .3s ease}
+          #changeNotice.fade-in{display:block;opacity:1}
+          .btn-toggle .btn{min-width:110px}
+          .dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;vertical-align:middle;margin-right:.4rem}
+          .dot-green{background:#28a745}
+          .dot-red{background:#dc3545}
+        </style>
+      </head>
+      <body>
+        <header class="sticky-header">
+          <div class="container py-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://www.educatic.com.co/assets/images/logo.png" height="80" alt="Logo de Educatic" style="width:auto;">
+                <div>
+                  <h1 class="h5 mb-1">Proceso de Inscripción – EDUCATIC</h1>
+                  <div class="small text-secondary">Paso 2 de 6 · ¿Cuál es tu programa de interés?</div>
+                </div>
+              </div>
+              <span class="text-success d-none" id="stepCheck">✓ Completado</span>
+            </div>
+            <div class="stepbar mt-3"><div></div></div>
+          </div>
+          <div id="guidanceBanner" class="border-top border-bottom bg-light">
+            <div class="container py-2 small d-flex align-items-center gap-2">
+              <i class="bi bi-compass"></i>
+              <span id="bannerCopy"></span>
+            </div>
+          </div>
+        </header>
+
+        <main class="container my-4">
+
+<form id="formPaso2" novalidate>
+
+  <section class="card shadow-sm mb-4 card-ghost">
+    <div class="card-body">
+      <h2 class="h5 mb-3">Tipo de aspirante</h2>
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <div class="btn-group btn-toggle" role="group" aria-label="Tipo de aspirante">
+            <input type="radio" class="btn-check" name="tipoAsp" id="tipoNuevo" value="Nuevo" required>
+            <label class="btn btn-outline-primary" for="tipoNuevo"><i class="bi bi-person-plus"></i> Nuevo</label>
+            <input type="radio" class="btn-check" name="tipoAsp" id="tipoAntiguo" value="Antiguo">
+            <label class="btn btn-outline-primary" for="tipoAntiguo"><i class="bi bi-arrow-repeat"></i> Antiguo</label>
+          </div>
+        </div>
+        <div class="col-lg-6 small">
+          <p class="mb-1"><strong>Nuevo:</strong> Es quien, habiendo cumplido los requisitos reglamentarios, ingresa por primera vez a uno de los programas académicos de la Institución, o que habiendo estado matriculado en un primer y único período académico, no haya obtenido calificaciones definitivas.</p>
+          <p class="mb-0"><strong>Antiguo:</strong> Es aquel que, cumpliendo con los requisitos reglamentarios, solicita nuevamente vinculación a la Institución Universitaria.</p>
+        </div>
+      </div>
+
+      <div id="opcionesNuevo" class="mt-4 d-none">
+        <h3 class="h6 mb-3">Opciones para <strong>Nuevo</strong></h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <h4 class="h6 mb-0"><i class="bi bi-mortarboard"></i> Primera vez</h4>
+                  <span class="badge text-bg-success"><span class="dot dot-green"></span>Abierto</span>
+                </div>
+                <p class="small text-secondary mb-0">Bachiller con título de Educación Media que solicita por primera vez admisión a un programa del Tecnológico de Antioquia.</p>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button type="button" class="btn btn-primary w-100 sel-op" data-op="primera_vez">Seleccionar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <h4 class="h6 mb-0"><i class="bi bi-box-arrow-right"></i> Transferencia externa</h4>
+                  <span class="badge text-bg-danger"><span class="dot dot-red"></span>Cerrado</span>
+                </div>
+                <p class="small text-secondary mb-0">Aspirante nuevo que ha cursado satisfactoriamente <strong>dos o más semestres</strong> en otra IES (últimos 5 años) y solicita admisión.</p>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button type="button" class="btn btn-primary w-100" disabled>Seleccionar</button>
+                <div class="form-text text-danger">Las fechas de Transferencias se encuentran cerradas.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="opcionesAntiguo" class="mt-4 d-none">
+        <h3 class="h6 mb-3">Opciones para <strong>Antiguo</strong></h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <h4 class="h6 mb-0"><i class="bi bi-journal-arrow-up"></i> Reingreso</h4>
+                  <span class="badge text-bg-danger"><span class="dot dot-red"></span>Cerrado</span>
+                </div>
+                <p class="small text-secondary mb-0">Estuvo matriculado, tiene notas registradas y desea continuar. Se acoge al plan de estudios <em>vigente</em> del programa.</p>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button type="button" class="btn btn-primary w-100" disabled>Seleccionar</button>
+                <div class="form-text text-danger">Las fechas de Reingresos se encuentran cerradas.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <h4 class="h6 mb-0"><i class="bi bi-arrow-left-right"></i> Transferencia interna</h4>
+                  <span class="badge text-bg-danger"><span class="dot dot-red"></span>Cerrado</span>
+                </div>
+                <p class="small text-secondary mb-0">Ha estado/está matriculado o es graduado de la Institución y solicita ingresar a otro programa (se acoge al plan vigente).</p>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button type="button" class="btn btn-primary w-100" disabled>Seleccionar</button>
+                <div class="form-text text-danger">Las fechas de Transferencias se encuentran cerradas.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="h5 mb-1">Filtra tu búsqueda</h2>
+      <p id="msgDinamico" class="small text-secondary mb-3">Selecciona sede, nivel y jornada para ver información contextual.</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label" for="fSede">Sede</label>
+          <select class="form-select" id="fSede">
+            <option value="">Todas</option>
+            <option value="Campestre">Campestre</option>
+            <option value="Centro">Centro</option>
+            <option value="Virtual">Virtual</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label" for="fNivelEstudio">Nivel de estudio</label>
+          <select class="form-select" id="fNivelEstudio">
+            <option value="">Todos</option>
+            <optgroup label="Pregrado">
+              <option value="Profesional">Profesional</option>
+              <option value="Técnico">Técnico</option>
+              <option value="Tecnólogo">Tecnólogo</option>
+              <option value="Licenciatura">Licenciatura</option>
+            </optgroup>
+            <optgroup label="Posgrado">
+              <option value="Especialización">Especialización</option>
+              <option value="Maestría">Maestría</option>
+              <option value="Postdoctorado">Postdoctorado</option>
+              <option value="Doctorado">Doctorado</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label" for="fJornada">Jornada</label>
+          <select class="form-select" id="fJornada">
+            <option value="">Todas</option>
+            <option>Diurna</option>
+            <option>Nocturna</option>
+            <option>Solo Sábado</option>
+            <option>Virtual</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="h5 mb-3">Programas disponibles</h2>
+      <div class="table-responsive">
+        <table class="table align-middle table-hover" id="tablaProgramas">
+          <thead class="table-light">
+            <tr>
+              <th></th>
+              <th><i class="bi bi-building"></i> Dependencia</th>
+              <th><i class="bi bi-mortarboard"></i> Programa</th>
+              <th><i class="bi bi-award"></i> Nivel</th>
+              <th><i class="bi bi-clock-history"></i> Jornada</th>
+              <th><i class="bi bi-card-text"></i> Perfil</th>
+              <th><i class="bi bi-list-check"></i> Pensum</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="changeNotice" class="text-muted small mt-2">💡 Para cambiar de programa, elimina tu selección actual.</div>
+      <div class="alert alert-info d-none" id="sinResultados">No hay programas que coincidan con los filtros seleccionados.</div>
+
+      <div id="resumenInferior" class="mt-3 d-none">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <h3 class="h6 mb-0">Programa seleccionado</h3>
+            </div>
+            <div id="resumenInferiorContent">Selecciona un programa para ver el detalle aquí.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="d-flex justify-content-end gap-2 mb-4">
+    <button type="button" id="btnContinuar" class="" disabled></button>
+  </div> 
+</form>
+
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <a class="btn btn-outline-secondary" href="mockup_paso1_educatic_bootstrap.html">Atrás</a>
+            <a class="btn btn-primary" href="mockup_paso3_educatic_bootstrap.html">Siguiente</a>
+          </div>
+        </main>
+
+        <footer class="disclaimer py-4 border-top">
+          <div class="container">
+            <div class="small text-muted mb-2">
+              <strong>Disclaimer:</strong> Este prototipo forma parte del modelo en la nube de EDUCATIC, disponible bajo modalidad SaaS.
+              Su modernización tecnológica está incluida para los clientes con contrato vigente de soporte e infraestructura,
+              lo que les permite acceder a la última versión sin costos adicionales de actualización.
+            </div>
+            <div class="small text-end">2025© Todos los Derechos Reservados</div>
+            <div class="text-end mt-1">
+              <img src="https://clientes.educatic.com.co/sao/images/allrights.png" alt="" border="0" style="height:16px;">
+            </div>
+          </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+          // Copy de guía por paso
+          const bannerTexts = {
+            1: "Paso 1 – Identifícate · Verifica tus datos para personalizar tu inscripción.",
+            2: "Paso 2 – ¿Cuál es tu programa de interés? · Encuentra el programa que se ajusta a tu futuro. Selecciona tu nivel, jornada y sede para conocer la oferta disponible.",
+            3: "Paso 3 – Tu perfil · Cuéntanos sobre ti para brindarte apoyo oportuno.",
+            4: "Paso 4 – Información académica · Registra tu trayectoria para validar requisitos.",
+            5: "Paso 5 – Documentación requerida · Sube tus archivos y valida su estado.",
+            6: "Paso 6 – Entrevista · Agenda tu cita en los horarios disponibles."
+          };
+          document.getElementById('bannerCopy').textContent = bannerTexts[2];
+
+          // Helper para microvalidación on-blur
+          document.addEventListener('blur', (e)=>{
+            const el=e.target;
+            if(el.closest('form') && el.hasAttribute('required')){
+              el.classList.toggle('is-invalid', !el.checkValidity());
+              el.classList.toggle('is-valid', el.checkValidity());
+            }
+          }, true);
+        </script>
+
+<script>
+let __lockProgramSelection = false;
+let __selectedProgramKey = null;
+
+// Datos demo
+const programas = [
+  {dependencia:"Facultad de Ingeniería", programa:"Ingeniería de Sistemas", nivel:"Profesional", jornada:"Diurna", sede:"Campestre", perfil:"Desarrollo de software, datos."},
+  {dependencia:"Facultad de Educación", programa:"Licenciatura en Matemáticas", nivel:"Licenciatura", jornada:"Diurna", sede:"Centro", perfil:"Formación docente y pedagógica."},
+  {dependencia:"Facultad de Tecnología", programa:"Tecnología en Desarrollo de Software", nivel:"Tecnólogo", jornada:"Nocturna", sede:"Centro", perfil:"Soluciones aplicadas y soporte."},
+  {dependencia:"Facultad Técnica", programa:"Técnico en Soporte TI", nivel:"Técnico", jornada:"Virtual", sede:"Virtual", perfil:"Operación y soporte de infraestructuras."},
+  {dependencia:"Facultad de Ciencias", programa:"Maestría en Analítica de Datos", nivel:"Maestría", jornada:"Nocturna", sede:"Centro", perfil:"Modelos predictivos y ciencia de datos."},
+  {dependencia:"Facultad de Salud", programa:"Especialización en Seguridad del Paciente", nivel:"Especialización", jornada:"Diurna", sede:"Campestre", perfil:"Gestión del riesgo clínico."},
+  {dependencia:"Facultad de Investigación", programa:"Doctorado en Ingenierías", nivel:"Doctorado", jornada:"Diurna", sede:"Virtual", perfil:"Investigación avanzada en ingeniería."}
+];
+
+const tipoRadios = document.querySelectorAll('input[name="tipoAsp"]');
+const opcionesNuevo = document.getElementById('opcionesNuevo');
+const opcionesAntiguo = document.getElementById('opcionesAntiguo');
+const fSede = document.getElementById('fSede');
+const fNivel = document.getElementById('fNivelEstudio');
+const fJornada = document.getElementById('fJornada');
+const msgDinamico = document.getElementById('msgDinamico');
+const tablaBody = document.querySelector('#tablaProgramas tbody');
+const sinResultados = document.getElementById('sinResultados');
+const btnContinuar = document.getElementById('btnContinuar');
+const changeNotice = document.getElementById('changeNotice');
+
+const mensajesSede = {
+  "Campestre":"Sede Campestre ubicada en XYZ, con zonas verdes y espacios académicos modernos.",
+  "Centro":"Sede Centro, en el corazón de la ciudad, con fácil acceso a transporte y servicios.",
+  "Virtual":"Modalidad 100% virtual, con clases en línea y acceso a recursos desde cualquier lugar."
+};
+const mensajesNivel = {
+  "Profesional":"Formación universitaria con enfoque teórico‑práctico y competencias para el ejercicio profesional.",
+  "Técnico":"Trayecto corto y práctico para desarrollar habilidades operativas y de soporte.",
+  "Tecnólogo":"Formación aplicada de nivel intermedio, con énfasis en gestión y solución de problemas reales.",
+  "Licenciatura":"Programas orientados a la docencia y la pedagogía para liderar procesos educativos.",
+  "Especialización":"Posgrado de profundización para fortalecer competencias profesionales.",
+  "Maestría":"Posgrado con énfasis en investigación o profundización académica.",
+  "Postdoctorado":"Estancia de investigación avanzada para consolidar trayectoria científica.",
+  "Doctorado":"Formación investigativa de alto nivel para generar conocimiento original."
+};
+const mensajesJornada = {
+  "Diurna":"Clases en la mañana y tarde; ideal si dispones de tiempo en el día.",
+  "Nocturna":"Clases en la noche; concilia con trabajo u otros compromisos diurnos.",
+  "Solo Sábado":"Presencial solo sábados; máxima flexibilidad semanal.",
+  "Virtual":"Aprende desde cualquier lugar, con sesiones sincrónicas y trabajo autónomo."
+};
+
+function programKey(p){ return [p.dependencia,p.programa,p.nivel,p.jornada,p.sede].join('|'); }
+
+function lockProgramSelection(lock){
+  __lockProgramSelection = !!lock;
+  // Radios
+  document.querySelectorAll('input[name="progSel"]').forEach(r => {
+    if(__lockProgramSelection){ if(!r.checked){ r.disabled = true; } }
+    else { r.disabled = false; }
+  });
+  // Bloquear filtros y tipo aspirante
+  [fSede,fNivel,fJornada].forEach(sel => { if(sel) sel.disabled = __lockProgramSelection; });
+  tipoRadios.forEach(r => { r.disabled = __lockProgramSelection; });
+  // Microcopy
+  if(__lockProgramSelection){ changeNotice.classList.add('fade-in'); }
+  else{ changeNotice.classList.remove('fade-in'); changeNotice.style.display='none'; changeNotice.style.opacity='0'; }
+}
+
+tipoRadios.forEach(r => r.addEventListener('change', () => {
+  const tipo = document.querySelector('input[name="tipoAsp"]:checked')?.value;
+  opcionesNuevo.classList.toggle('d-none', tipo !== 'Nuevo');
+  opcionesAntiguo.classList.toggle('d-none', tipo !== 'Antiguo');
+  validarContinuar();
+}));
+
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('.sel-op')){
+    document.querySelectorAll('.sel-op').forEach(b=>b.classList.remove('btn-success'));
+    const btn = e.target.closest('.sel-op');
+    btn.classList.add('btn-success'); btn.classList.remove('btn-primary');
+    validarContinuar();
+  }
+});
+
+[fSede, fNivel, fJornada].forEach(sel => sel.addEventListener('change', () => {
+  const partes = [];
+  if (fSede.value && mensajesSede[fSede.value]) partes.push(mensajesSede[fSede.value]);
+  if (fNivel.value && mensajesNivel[fNivel.value]) partes.push(mensajesNivel[fNivel.value]);
+  if (fJornada.value && mensajesJornada[fJornada.value]) partes.push(mensajesJornada[fJornada.value]);
+  msgDinamico.textContent = partes.length ? partes.join(" ") : "Selecciona sede, nivel y jornada para ver información contextual.";
+  filtrarProgramas();
+}));
+
+function filtrarProgramas(){
+  const sede=fSede.value, nivel=fNivel.value, jornada=fJornada.value;
+  const rows = programas.filter(p => (!sede || p.sede===sede) && (!nivel || p.nivel===nivel) && (!jornada || p.jornada===jornada));
+  tablaBody.innerHTML='';
+  rows.forEach((p, idx)=>{
+    const tr=document.createElement('tr');
+    tr.classList.add('table-light');
+    tr.innerHTML = `
+      <td><input type="radio" name="progSel" value="${idx}"></td>
+      <td>${p.dependencia}</td>
+      <td><i class="bi bi-mortarboard text-secondary me-1"></i>${p.programa}</td>
+      <td>${p.nivel}</td>
+      <td>${p.jornada}</td>
+      <td class="small text-secondary">${p.perfil}</td>
+      <td><a href="#" target="_blank" class="badge badge-soft text-decoration-none"><i class="bi bi-box-arrow-up-right"></i> Ver pensum</a></td>`;
+    tablaBody.appendChild(tr);
+  });
+  sinResultados.classList.toggle('d-none', rows.length>0);
+
+  document.querySelectorAll('input[name="progSel"]').forEach((r,i)=> r.addEventListener('change', ()=>{
+    __selectedProgramKey = programKey(rows[i]);
+    validarContinuar();
+    actualizarResumen(rows[i]);
+    lockProgramSelection(true);
+  }));
+
+  // Restaurar selección y bloqueo
+  if(__lockProgramSelection && __selectedProgramKey){
+    document.querySelectorAll('input[name="progSel"]').forEach((r)=>{
+      const idx=parseInt(r.value,10); const row=rows[idx];
+      if(row && programKey(row)===__selectedProgramKey){ r.checked=true; }
+    });
+    lockProgramSelection(true);
+  }else{
+    lockProgramSelection(false);
+  }
+}
+// Mostrar todo al cargar
+filtrarProgramas();
+
+function actualizarResumen(p){
+  const cont = document.getElementById('resumenInferior');
+  const body = document.getElementById('resumenInferiorContent');
+  if(!p){ cont.classList.add('d-none'); return; }
+  const hoy = new Date();
+  const periodo = hoy.getFullYear() + "." + (hoy.getMonth()<6 ? "1" : "2");
+  const fechaTxt = hoy.toLocaleDateString('es-CO');
+  body.innerHTML = `
+    <div class="row g-3 align-items-center">
+      <div class="col-md-8">
+        <div class="fw-semibold">${p.programa}</div>
+        <div class="small text-secondary">Dependencia: ${p.dependencia} · Nivel: ${p.nivel} · Jornada: ${p.jornada} · Sede: ${p.sede}</div>
+        <div class="small mt-1">${p.perfil}</div>
+      </div>
+      <div class="col-md-4 text-md-end">
+        <div class="small text-secondary">Periodo: ${periodo}</div>
+        <div class="small text-secondary">Fecha de aspiración: ${fechaTxt}</div>
+        <div class="mt-2 d-flex flex-wrap gap-2 justify-content-md-end">
+          <button type="button" class="btn btn-outline-secondary btn-sm" id="btnImprimirInf"><i class="bi bi-printer"></i> Imprimir</button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnPagarInf"><i class="bi bi-credit-card"></i> Pagar</button>
+          <button type="button" class="btn btn-outline-primary btn-sm" id="btnBeneficioInf"><i class="bi bi-piggy-bank"></i> Beneficio</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" id="btnEliminarInf"><i class="bi bi-trash"></i> Eliminar</button>
+        </div>
+      </div>
+    </div>`;
+  cont.classList.remove('d-none');
+  document.getElementById('btnImprimirInf').onclick = ()=>window.print();
+  document.getElementById('btnPagarInf').onclick = ()=>alert('Pasarela de pagos (demo)');
+  document.getElementById('btnBeneficioInf').onclick = ()=>alert('Solicitud de beneficio financiero (demo)');
+  document.getElementById('btnEliminarInf').onclick = ()=>{
+    const sel = document.querySelector('input[name="progSel"]:checked'); if(sel){ sel.checked=false; }
+    cont.classList.add('d-none'); 
+    __selectedProgramKey=null; 
+    lockProgramSelection(false);
+  };
+}
+
+function validarContinuar(){
+  const tipo = document.querySelector('input[name="tipoAsp"]:checked')?.value;
+  const opOk = (tipo === 'Nuevo' && document.querySelector('#opcionesNuevo .btn-success'))
+            || (tipo === 'Antiguo' && document.querySelector('#opcionesAntiguo .btn-success'));
+  const progOk = !!document.querySelector('input[name="progSel"]:checked');
+  document.getElementById('btnContinuar').disabled = !(tipo && opOk && progOk);
+}
+
+document.getElementById('btnContinuar').addEventListener('click', () => {
+  document.getElementById('stepCheck').classList.remove('d-none');
+  window.location.href = "mockup_paso3_educatic_bootstrap.html";
+});
+</script>
+
+      </body>
+    </html>
