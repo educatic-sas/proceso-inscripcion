@@ -127,6 +127,7 @@
 </div>
 </div>
 </section>
+
 <!-- Bloque: Usuario NO EXISTE (Registro) -->
 <section class="card shadow-sm form-section mt-4" id="secNoExiste">
 <div class="card-body">
@@ -238,7 +239,7 @@
 <select class="form-select" id="regSexo" required=""><option disabled="True" selected="True" value="">Seleccionar...</option><option>Masculino</option><option>Femenino</option><option>No Binario</option></select>
 <div class="invalid-feedback">Requerido.</div>
 </div>
-<div class="col-md-4">
+<div class="col-md-8">
 <label class="form-label icon-required" for="regEstrato">Estrato socioeconómico</label>
 <select class="form-select" id="regEstrato" required="">
 <option disabled="" selected="" value="">Seleccionar...</option>
@@ -251,23 +252,36 @@
 </select>
 <div class="invalid-feedback">Requerido.</div>
 </div>
+
+<div class="col-md-4">
+<label class="form-label">¿Nacionalidad colombiana?</label>
+<div aria-label="Nacionalidad" class="btn-group btn-toggle" role="group">
+<input autocomplete="off" class="btn-check" id="nacSi1" name="nacCol" required="" type="radio"/>
+<label class="btn btn-outline-primary" for="nacSi1">Sí</label>
+<input autocomplete="off" class="btn-check" id="nacNo1" name="nacCol" type="radio"/>
+<label class="btn btn-outline-primary" for="nacNo1">No</label>
+</div>
+</div>
+
 <div class="col-12 d-flex gap-2">
 <button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
                   Ver contrato Autorización Habeas Data
-                </button>
+</button>
 <button class="btn btn-success" disabled="" id="btnContinuarNoExiste" type="button">
                   Continuar
-                </button>
+</button>
 <div class="form-text invisible">placeholder</div>
 </div>
-</div>
+
 </div>
 </section>
 </form>
+
 <div class="d-flex justify-content-between align-items-center mt-4">
 <a class="btn btn-outline-secondary" href="mockup_paso1_educatic_bootstrap.html">Atrás</a>
 <a class="btn btn-primary" href="mockup_paso2_educatic_bootstrap.html">Siguiente</a>
 </div>
+
 <div class="nav-bottom">
 <button class="btn btn-outline-secondary" id="btnBack" type="button">Atrás</button>
 <button class="btn btn-primary" disabled="" id="btnNext" type="button">Siguiente</button>
