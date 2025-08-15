@@ -119,14 +119,16 @@
 <button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
                   Ver contrato Autorización Habeas Data
                 </button>
+				<!--
 <button class="btn btn-success" disabled="" id="btnContinuarExiste" type="button">
                   Continuar
-                </button>
+                </button> -->
 <div class="form-text invisible">placeholder</div>
 </div>
 </div>
 </div>
 </section>
+
 <!-- Bloque: Usuario NO EXISTE (Registro) -->
 <section class="card shadow-sm form-section mt-4" id="secNoExiste">
 <div class="card-body">
@@ -176,13 +178,13 @@
 </div>
 <div class="col-md-4">
 <label class="form-label" for="regTel">Teléfono</label>
-<input class="form-control" id="regTel" inputmode="numeric" pattern="\\d{7,10}" placeholder="Ej: 6041234567"/>
+<input class="form-control" id="regTel" inputmode="numeric" pattern="\d{7,10}" placeholder="Ej: 6041234567"/>
 <div class="form-text">Fijo: 7–10 dígitos.</div>
 <div class="invalid-feedback">Ingrese solo números (7–10 dígitos).</div>
 </div>
 <div class="col-md-4">
 <label class="form-label icon-required" for="regCel">Número de celular</label>
-<input class="form-control" id="regCel" inputmode="numeric" pattern="\\d{10}" placeholder="Ej: 3001234567" required=""/>
+<input class="form-control" id="regCel" inputmode="numeric" pattern="\d{10}" placeholder="Ej: 3001234567" required=""/>
 <div class="form-text">10 dígitos.</div>
 <div class="invalid-feedback">Ingrese solo números (10 dígitos).</div>
 </div>
@@ -238,7 +240,7 @@
 <select class="form-select" id="regSexo" required=""><option disabled="True" selected="True" value="">Seleccionar...</option><option>Masculino</option><option>Femenino</option><option>No Binario</option></select>
 <div class="invalid-feedback">Requerido.</div>
 </div>
-<div class="col-md-4">
+<div class="col-md-8">
 <label class="form-label icon-required" for="regEstrato">Estrato socioeconómico</label>
 <select class="form-select" id="regEstrato" required="">
 <option disabled="" selected="" value="">Seleccionar...</option>
@@ -251,23 +253,37 @@
 </select>
 <div class="invalid-feedback">Requerido.</div>
 </div>
+
+<div class="col-md-4">
+<label class="form-label">¿Nacionalidad colombiana?</label>
+<div aria-label="Nacionalidad" class="btn-group btn-toggle" role="group">
+<input autocomplete="off" class="btn-check" id="nacSi1" name="nacCol" required="" type="radio"/>
+<label class="btn btn-outline-primary" for="nacSi1">Sí</label>
+<input autocomplete="off" class="btn-check" id="nacNo1" name="nacCol" type="radio"/>
+<label class="btn btn-outline-primary" for="nacNo1">No</label>
+</div>
+</div>
+
 <div class="col-12 d-flex gap-2">
 <button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
                   Ver contrato Autorización Habeas Data
-                </button>
+</button>
+<!--
 <button class="btn btn-success" disabled="" id="btnContinuarNoExiste" type="button">
                   Continuar
-                </button>
+</button> -->
 <div class="form-text invisible">placeholder</div>
 </div>
-</div>
+
 </div>
 </section>
 </form>
+
 <div class="d-flex justify-content-between align-items-center mt-4">
 <a class="btn btn-outline-secondary" href="mockup_paso1_educatic_bootstrap.html">Atrás</a>
 <a class="btn btn-primary" href="mockup_paso2_educatic_bootstrap.html">Siguiente</a>
 </div>
+
 <div class="nav-bottom">
 <button class="btn btn-outline-secondary" id="btnBack" type="button">Atrás</button>
 <button class="btn btn-primary" disabled="" id="btnNext" type="button">Siguiente</button>
@@ -518,10 +534,10 @@
   if (tPub){  tPub.addEventListener('change', clearTranspError); }
 
   // Remover/ocultar botón "Continuar" interno si aún existiera
-  ['btnContinuarExiste','btnContinuarNoExiste'].forEach(id=>{
-    const b = document.getElementById(id);
-    if (b){ const wrap = b.closest('.d-flex') || b.parentElement; if (wrap) wrap.style.display='none'; else b.style.display='none'; }
-  });
+ // ['btnContinuarExiste','btnContinuarNoExiste'].forEach(id=>{
+   // const b = document.getElementById(id);
+  //  if (b){ const wrap = b.closest('.d-flex') || b.parentElement; if (wrap) wrap.style.display='none'; else b.style.display='none'; }
+  //});
 
   // Re-evaluar gating al aceptar Habeas Data (por si algún listener anterior no lo hacía)
   const chkAcepto = document.getElementById('chkAceptoContrato') || document.getElementById('chkAcepto');
