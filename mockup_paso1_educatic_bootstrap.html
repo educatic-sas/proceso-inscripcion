@@ -336,8 +336,8 @@
       <div>
         <a class="btn btn-outline-secondary" href="mockup_paso1_educatic_bootstrap.html">Atrás</a>
       </div>
-      <div class="d-flex justify-content-end align-items-center">
-        <div class="d-flex gap-2">
+      <div class="d-flex justify-content-end align-items-center gap-2">
+        <div class="d-flex" id="habeasNoExiste">
           <button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
             Ver contrato Autorización Habeas Data
           </button>
@@ -448,6 +448,7 @@
     (function () {
       const secExiste = document.getElementById('secExiste');
       const secNoExiste = document.getElementById('secNoExiste');
+      const habeasNoExiste = document.getElementById('habeasNoExiste');
       const secDireNoExiste = document.getElementById('secDireNoExiste');
       const btnConsultar = document.getElementById('btnConsultar');
       const tipoDoc = document.getElementById('tipoDoc');
@@ -470,6 +471,7 @@
       function estadoInicial() {
         if (secExiste) secExiste.classList.add('d-none');
         if (secNoExiste) secNoExiste.classList.add('d-none');
+        if (habeasNoExiste) habeasNoExiste.classList.add('d-none');
         if (secDireNoExiste) secDireNoExiste.classList.add('d-none');
         nextBtn.disabled = true;
       }
@@ -526,6 +528,7 @@
         const existe = /^\d+$/.test(valor) && (parseInt(valor, 10) % 2 === 0);
         if (secExiste) secExiste.classList.toggle('d-none', !existe);
         if (secNoExiste) secNoExiste.classList.toggle('d-none', existe);
+        if (habeasNoExiste) habeasNoExiste.classList.toggle('d-none', existe);
         if (secDireNoExiste) secDireNoExiste.classList.toggle('d-none', existe);
         // Si no existe, mostrar resumen de doc/tipo
         if (!existe) {
