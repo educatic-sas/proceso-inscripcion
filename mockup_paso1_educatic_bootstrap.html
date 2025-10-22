@@ -1,586 +1,658 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="es">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Paso 1 – Identifícate: ¿Quién eres? | EDUCATIC</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
-<style>
-          body{background:#f8fafc}
-          .sticky-header{position:sticky; top:0; z-index:1030; background:#fff; box-shadow:0 1px 0 rgba(0,0,0,.06)}
-          .stepbar{height:6px; background:#e9ecef; border-radius:999px; overflow:hidden}
-          .stepbar>div{height:100%; width:16.7%; background:#0d6efd}
-          #guidanceBanner{position:sticky; top:64px; z-index:1028}
-          footer.disclaimer{color:#6c757d}
-          .nav-bottom{display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem}
-        </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Paso 1 – Identifícate: ¿Quién eres? | EDUCATIC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #f8fafc
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .06)
+    }
+
+    .stepbar {
+      height: 6px;
+      background: #e9ecef;
+      border-radius: 999px;
+      overflow: hidden
+    }
+
+    .stepbar>div {
+      height: 100%;
+      width: 16.7%;
+      background: #0d6efd
+    }
+
+    #guidanceBanner {
+      position: sticky;
+      top: 64px;
+      z-index: 1028
+    }
+
+    footer.disclaimer {
+      color: #6c757d
+    }
+
+    .nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem
+    }
+  </style>
 </head>
+
 <body>
-<header class="sticky-header">
-<div class="container py-3">
-<div class="d-flex align-items-center justify-content-between">
-<div class="d-flex align-items-center gap-3">
-<img alt="Logo de Educatic" height="80" src="https://www.educatic.com.co/assets/images/logo.png" style="width:auto;"/>
-<div>
-<h1 class="h5 mb-1">Proceso de Inscripción – EDUCATIC</h1>
-<div class="small text-secondary">Paso 1 de 6</div>
-</div>
-</div>
-<span class="text-success d-none" id="stepCheck">✓ Completado</span>
-</div>
-<div class="stepbar mt-3"><div></div></div>
-</div>
-<div class="border-top border-bottom bg-light" id="guidanceBanner">
-<div class="container py-2 small d-flex align-items-center gap-2">
-<i class="bi bi-compass"></i>
-<span>Paso 1 – Identifícate: ¿Quién eres? · Danos tus datos para reconocerte y personalizar tu proceso. ¡Queremos que tu inscripción sea rápida y segura!</span>
-</div>
-</div>
-</header>
-<main class="container my-4">
-<div class="alert alert-info small">
-        Demo: ingresa un <strong>número de documento par</strong> para simular <strong>usuario existente</strong> y un
-        <strong>número impar</strong> para simular <strong>usuario no existente</strong>.
+  <header class="sticky-header">
+    <div class="container py-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+          <img alt="Logo de Educatic" height="80" src="https://www.educatic.com.co/assets/images/logo.png"
+            style="width:auto;" />
+          <div>
+            <h1 class="h5 mb-1">Proceso de Inscripción – EDUCATIC</h1>
+            <div class="small text-secondary">Paso 1 de 6</div>
+          </div>
+        </div>
+        <span class="text-success d-none" id="stepCheck">✓ Completado</span>
       </div>
-<form id="formPaso1" novalidate="">
-<!-- Bloque: Consulta -->
-<section class="card shadow-sm mb-4">
-<div class="card-body">
-<h2 class="h5 mb-3">Consulta</h2>
-<div class="row g-3 align-items-end consulta-row">
-<div class="col-md-4">
-<label class="form-label icon-required" for="tipoDoc">Tipo de documento</label>
-<select aria-describedby="ayudaTipoDoc" class="form-select" id="tipoDoc" required="">
-<option disabled="" selected="" value="">Seleccionar...</option>
-<option>Cédula de ciudadanía</option>
-<option>Tarjeta de identidad</option>
-<option>Cédula de extranjería</option>
-<option>Pasaporte</option>
-</select>
-<div class="form-text" id="ayudaTipoDoc">
-                  Selecciona el tipo de documento con el que te identificas.
-                </div>
-<div class="invalid-feedback">Selecciona un tipo de documento.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="numDoc">Número de documento</label>
-<input aria-describedby="ayudaNumDoc" class="form-control" id="numDoc" inputmode="numeric" pattern="\d{5,20}" required=""/>
-<div class="form-text" id="ayudaNumDoc">
-                  Solo números, entre 5 y 20 dígitos.
-                </div>
-<div class="invalid-feedback">Ingresa un número válido (5–20 dígitos).</div>
-</div>
-<div class="col-md-4 col-btn">
-<label class="form-label invisible">Acción</label>
-<button class="btn btn-primary w-100 btn-eq" id="btnConsultar" type="button">Consultar</button>
-<div class="form-text invisible">placeholder</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Bloque: Usuario EXISTE -->
-<section class="card shadow-sm form-section" id="secExiste">
-<div class="card-body">
-<div class="d-flex align-items-center justify-content-between">
-<h2 class="h5 mb-0">Información Personal (lectura)</h2>
-<span class="badge text-bg-success">Registro encontrado</span>
-</div>
-<hr/>
-<div class="row g-3">
-<div class="col-md-6">
-<label class="form-label">Nombres y Apellidos</label>
-<input class="form-control" id="exNombre" readonly="" value="María Camila Pérez Ríos"/>
-</div>
-<div class="col-md-6">
-<label class="form-label">Email personal</label>
-<input class="form-control mask" id="exEmailP" readonly="" value="mari******@gmail.com"/>
-</div>
-<div class="col-md-6">
-<label class="form-label">Email institucional</label>
-<input class="form-control mask" id="exEmailI" readonly="" value="mari******@educatic.edu.co"/>
-</div>
-<div class="col-md-6">
-<label class="form-label">Número de celular</label>
-<input class="form-control mask" id="exCel" readonly="" value="3001******89"/>
-</div>
-<div class="col-md-6">
-<label class="form-label">¿Nacionalidad colombiana?</label>
-<div aria-label="Nacionalidad" class="btn-group btn-toggle" role="group">
-<input autocomplete="off" class="btn-check" id="nacSi" name="nacCol" required="" type="radio"/>
-<label class="btn btn-outline-primary" for="nacSi">Sí</label>
-<input autocomplete="off" class="btn-check" id="nacNo" name="nacCol" type="radio"/>
-<label class="btn btn-outline-primary" for="nacNo">No</label>
-</div>
-<div class="form-text">Elige una opción para continuar.</div>
-</div>
-<div class="col-12 d-flex flex-wrap gap-2">
-<button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
-                  Ver contrato Autorización Habeas Data
-                </button>
-				<!--
+      <div class="stepbar mt-3">
+        <div></div>
+      </div>
+    </div>
+    <div class="border-top border-bottom bg-light" id="guidanceBanner">
+      <div class="container py-2 small d-flex align-items-center gap-2">
+        <i class="bi bi-compass"></i>
+        <span>Paso 1 – Identifícate: ¿Quién eres? · Danos tus datos para reconocerte y personalizar tu proceso.
+          ¡Queremos que tu inscripción sea rápida y segura!</span>
+      </div>
+    </div>
+  </header>
+  <main class="container my-4">
+    <div class="alert alert-info small">
+      Demo: ingresa un <strong>número de documento par</strong> para simular <strong>usuario existente</strong> y un
+      <strong>número impar</strong> para simular <strong>usuario no existente</strong>.
+    </div>
+    <form id="formPaso1" novalidate="">
+      <!-- Bloque: Consulta -->
+      <section class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Consulta</h2>
+          <div class="row g-3 align-items-end consulta-row">
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="tipoDoc">Tipo de documento</label>
+              <select aria-describedby="ayudaTipoDoc" class="form-select" id="tipoDoc" required="">
+                <option disabled="" selected="" value="">Seleccionar...</option>
+                <option>Cédula de ciudadanía</option>
+                <option>Tarjeta de identidad</option>
+                <option>Cédula de extranjería</option>
+                <option>Pasaporte</option>
+              </select>
+              <div class="form-text" id="ayudaTipoDoc">
+                Selecciona el tipo de documento con el que te identificas.
+              </div>
+              <div class="invalid-feedback">Selecciona un tipo de documento.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="numDoc">Número de documento</label>
+              <input aria-describedby="ayudaNumDoc" class="form-control" id="numDoc" inputmode="numeric"
+                pattern="\d{5,20}" required="" />
+              <div class="form-text" id="ayudaNumDoc">
+                Solo números, entre 5 y 20 dígitos.
+              </div>
+              <div class="invalid-feedback">Ingresa un número válido (5–20 dígitos).</div>
+            </div>
+            <div class="col-md-4 col-btn">
+              <label class="form-label invisible">Acción</label>
+              <button class="btn btn-primary w-100 btn-eq" id="btnConsultar" type="button">Consultar</button>
+              <div class="form-text invisible">placeholder</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Bloque: Usuario EXISTE -->
+      <section class="card shadow-sm form-section" id="secExiste">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <h2 class="h5 mb-0">Datos personales</h2>
+            <span class="badge text-bg-success">Usuario encontrado</span>
+          </div>
+          <hr />
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nombres y Apellidos</label>
+              <input class="form-control" id="exNombre" readonly="" value="María Camila Pérez Ríos" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email personal</label>
+              <input class="form-control mask" id="exEmailP" readonly="" value="mari******@gmail.com" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email institucional</label>
+              <input class="form-control mask" id="exEmailI" readonly="" value="mari******@educatic.edu.co" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Número de celular</label>
+              <input class="form-control mask" id="exCel" readonly="" value="3001******89" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">¿Nacionalidad colombiana?</label>
+              <div aria-label="Nacionalidad" class="btn-group btn-toggle" role="group">
+                <input autocomplete="off" class="btn-check" id="nacSi" name="nacCol" required="" type="radio" />
+                <label class="btn btn-outline-primary" for="nacSi">Sí</label>
+                <input autocomplete="off" class="btn-check" id="nacNo" name="nacCol" type="radio" />
+                <label class="btn btn-outline-primary" for="nacNo">No</label>
+              </div>
+              <div class="form-text">Elige una opción para continuar.</div>
+            </div>
+            <div class="col-12 d-flex flex-wrap gap-2">
+              <button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
+                Ver contrato Autorización Habeas Data
+              </button>
+              <!--
 <button class="btn btn-success" disabled="" id="btnContinuarExiste" type="button">
                   Continuar
                 </button> -->
-<div class="form-text invisible">placeholder</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Bloque: Usuario NO EXISTE (Registro) -->
-<section class="card shadow-sm form-section mt-4" id="secNoExiste">
-<div class="card-body">
-<div class="d-flex align-items-center justify-content-between">
-<h2 class="h5 mb-0">Registro inicial</h2>
-<span class="badge text-bg-secondary">Crear nuevo registro</span>
-</div>
-<hr/><div class="alert alert-secondary small" id="resumenDoc">Documento consultado: <span id="resTipoDoc"></span> – <span id="resNumDoc"></span></div>
-<div class="row g-3">
-<!-- Identidad -->
-<div class="col-md-4">
-<label class="form-label icon-required" for="regFechaExp">Fecha expedición</label>
-<input class="form-control" id="regFechaExp" required="" type="date"/>
-<div class="invalid-feedback">Selecciona una fecha válida.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regFechaNac">Fecha nacimiento</label>
-<input class="form-control" id="regFechaNac" required="" type="date"/>
-<div class="invalid-feedback">Selecciona una fecha válida.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regLugarNac">Lugar de nacimiento (Ciudad)</label>
-<input class="form-control" id="regLugarNac" placeholder="Ingrese su ciudad de nacimiento" required=""/>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-3">
-<label class="form-label icon-required" for="regPNombre">Primer nombre</label>
-<input class="form-control" id="regPNombre" placeholder="Ingrese su primer nombre" required=""/>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-3">
-<label class="form-label" for="regSNombre">Segundo nombre</label>
-<input class="form-control" id="regSNombre" placeholder="Ingrese su segundo nombre (opcional)"/>
-</div>
-<div class="col-md-3">
-<label class="form-label icon-required" for="regPApellido">Primer apellido</label>
-<input class="form-control" id="regPApellido" placeholder="Ingrese su primer apellido" required=""/>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-3">
-<label class="form-label" for="regSApellido">Segundo apellido</label>
-<input class="form-control" id="regSApellido" placeholder="Ingrese su segundo apellido (opcional)"/>
-</div>
-<div class="col-md-4">
-<label class="form-label" for="regLibreta">Libreta militar</label>
-<input class="form-control" id="regLibreta"/>
-</div>
-<div class="col-md-4">
-<label class="form-label" for="regTel">Teléfono</label>
-<input class="form-control" id="regTel" inputmode="numeric" pattern="\d{7,10}" placeholder="Ej: 6041234567"/>
-<div class="form-text">Fijo: 7–10 dígitos.</div>
-<div class="invalid-feedback">Ingrese solo números (7–10 dígitos).</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regCel">Número de celular</label>
-<input class="form-control" id="regCel" inputmode="numeric" pattern="\d{10}" placeholder="Ej: 3001234567" required=""/>
-<div class="form-text">10 dígitos.</div>
-<div class="invalid-feedback">Ingrese solo números (10 dígitos).</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required">Tipo de transporte</label>
-<div class="btn-group btn-toggle" role="group">
-<input class="btn-check" id="transPart" name="transp" required="" type="radio"/>
-<label class="btn btn-outline-primary" for="transPart">Particular</label>
-<input class="btn-check" id="transPub" name="transp" type="radio"/>
-<label class="btn btn-outline-primary" for="transPub">Público</label>
-</div>
-<div class="invalid-feedback d-block" id="transpError" style="display:none;">Selecciona una opción.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regEmail">Correo electrónico</label>
-<input class="form-control" id="regEmail" placeholder="nombre@dominio.com" required="True" type="email"/>
-<div class="invalid-feedback">Formato de correo inválido.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regEmail2">Confirmar correo</label>
-<input class="form-control" id="regEmail2" placeholder="Confirme su correo" required="True" type="email"/>
-<div class="invalid-feedback">Debe coincidir con el correo anterior.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regEstadoCivil">Estado civil</label>
-<select class="form-select" id="regEstadoCivil" required="">
-<option disabled="" selected="" value="">Seleccionar...</option>
-<option>Soltero(a)</option>
-<option>Casado(a)</option>
-<option>Unión libre</option>
-<option>Divorciado(a)</option>
-<option>Viudo(a)</option>
-</select>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regCiudad">Ciudad</label>
-<input class="form-control" id="regCiudad" placeholder="Ingrese su ciudad de residencia" required=""/>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regComuna">Comuna y barrio</label>
-<input class="form-control" id="regComuna" placeholder="Ingrese su comuna y barrio" required=""/>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-8">
-<label class="form-label icon-required" for="regDir">Dirección</label>
-<input class="form-control" id="regDir" placeholder="Ingrese su dirección completa" required=""/>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-4">
-<label class="form-label icon-required" for="regSexo">Sexo biológico</label>
-<select class="form-select" id="regSexo" required=""><option disabled="True" selected="True" value="">Seleccionar...</option><option>Masculino</option><option>Femenino</option><option>No Binario</option></select>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-<div class="col-md-8">
-<label class="form-label icon-required" for="regEstrato">Estrato socioeconómico</label>
-<select class="form-select" id="regEstrato" required="">
-<option disabled="" selected="" value="">Seleccionar...</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-</select>
-<div class="invalid-feedback">Requerido.</div>
-</div>
-
-<div class="col-md-4">
-<label class="form-label">¿Nacionalidad colombiana?</label>
-<div aria-label="Nacionalidad" class="btn-group btn-toggle" role="group">
-<input autocomplete="off" class="btn-check" id="nacSi1" name="nacCol" required="" type="radio"/>
-<label class="btn btn-outline-primary" for="nacSi1">Sí</label>
-<input autocomplete="off" class="btn-check" id="nacNo1" name="nacCol" type="radio"/>
-<label class="btn btn-outline-primary" for="nacNo1">No</label>
-</div>
-</div>
-
-<div class="col-12 d-flex gap-2">
-<button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
-                  Ver contrato Autorización Habeas Data
-</button>
-<!--
-<button class="btn btn-success" disabled="" id="btnContinuarNoExiste" type="button">
-                  Continuar
-</button> -->
-<div class="form-text invisible">placeholder</div>
-</div>
-
-</div>
-</section>
-</form>
-
-<div class="d-flex justify-content-between align-items-center mt-4">
-<a class="btn btn-outline-secondary" href="mockup_paso1_educatic_bootstrap.html">Atrás</a>
-<a class="btn btn-primary" href="mockup_paso2_educatic_bootstrap.html">Siguiente</a>
-</div>
-
-<div class="nav-bottom">
-<button class="btn btn-outline-secondary" id="btnBack" type="button">Atrás</button>
-<button class="btn btn-primary" disabled="" id="btnNext" type="button">Siguiente</button>
-</div>
-</main>
-<footer class="disclaimer py-4 border-top">
-<div class="container">
-<div class="small text-muted mb-2">
-<strong>Disclaimer:</strong> Este prototipo forma parte del modelo en la nube de EDUCATIC, disponible bajo modalidad SaaS.
-              Su modernización tecnológica está incluida para los clientes con contrato vigente de soporte e infraestructura,
-              lo que les permite acceder a la última versión sin costos adicionales de actualización.
+              <div class="form-text invisible">placeholder</div>
             </div>
-<div class="small text-end">2025© Todos los Derechos Reservados</div>
-<div class="text-end mt-1">
-<img alt="" border="0" src="https://clientes.educatic.com.co/sao/images/allrights.png" style="height:16px;"/>
-</div>
-</div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-          // Rutas
-          const routes = {
-            1: 'mockup_paso1_educatic_bootstrap.html',
-            2: 'mockup_paso2_educatic_bootstrap.html',
-            3: 'mockup_paso3_educatic_bootstrap.html',
-            4: 'mockup_paso4_educatic_bootstrap.html',
-            5: 'mockup_paso5_educatic_bootstrap.html',
-            6: 'mockup_paso6_educatic_bootstrap.html'
-          };
-          const step = 1;
-          const backBtn = document.getElementById('btnBack');
-          const nextBtn = document.getElementById('btnNext');
-          // Atrás
-          if(step===1){
-            backBtn.disabled = true;
-          } else {
-            backBtn.addEventListener('click', ()=>{ window.location.href = routes[step-1]; });
-          }
-          // Gate de avance
-          const form = document.querySelector('main form');
-          function getGateButton(){
-            return document.getElementById('btnContinuar') || document.getElementById('btnConfirmar');
-          }
-          function canProceed(){
-            const gate = getGateButton();
-            if(gate) return !gate.disabled;
-            if(form) return form.checkValidity();
-            return true;
-          }
-          function updateNext(){
-            nextBtn.disabled = !canProceed();
-          }
-          // Escuchar cambios del formulario y de los botones internos
-          document.addEventListener('input', updateNext, true);
-          document.addEventListener('change', updateNext, true);
-          document.addEventListener('keyup', updateNext, true);
-          // Si la página tiene un botón interno de continuar/confirmar, refleja su estado
-          const gate = getGateButton();
-          if(gate){ 
-            const ro = new MutationObserver(updateNext);
-            ro.observe(gate, { attributes:true, attributeFilter:['disabled','class'] });
-          }
-          // Inicial
-          updateNext();
-          // Click en Siguiente / Finalizar
-          nextBtn.addEventListener('click', ()=>{
-            if(!canProceed()) return;
-            const gate = getGateButton();
-            if(gate) gate.click(); // dispara lógica interna propia de la página
-            if(step===6) { window.location.href = 'index.html'; }
-            else { window.location.href = routes[step+1]; }
-          });
-        </script>
-<div aria-hidden="true" class="modal fade" id="modalHabeas" tabindex="-1">
-<div class="modal-dialog modal-lg modal-dialog-scrollable">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title">Autorización Habeas Data</h5>
-<button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body">
-<p>Autorizo de manera previa, expresa e informada a EDUCATIC para tratar mis datos personales
-        conforme a su política de tratamiento, con las finalidades de gestión de procesos de admisión, contacto y servicio.</p>
-<div class="form-check mt-3">
-<input class="form-check-input" id="chkAceptoContrato" type="checkbox" value=""/>
-<label class="form-check-label" for="chkAceptoContrato">He leído y acepto el contenido del contrato.</label>
-</div>
-</div>
-<div class="modal-footer">
-<button class="btn btn-primary" data-bs-dismiss="modal" disabled="" id="btnAceptarContrato" type="button">Aceptar</button>
-</div>
-</div>
-</div>
-</div>
-<script>
-// ===== Lógica Paso 1 Unificada =====
-(function(){
-  const secExiste = document.getElementById('secExiste');
-  const secNoExiste = document.getElementById('secNoExiste');
-  const btnConsultar = document.getElementById('btnConsultar');
-  const tipoDoc = document.getElementById('tipoDoc');
-  const numDoc = document.getElementById('numDoc');
-  const nextBtn = document.getElementById('btnNext');
-  // Ocultar botón Atrás del shell en paso 1
-  const back = document.getElementById('btnBack'); if (back) back.style.display='none';
-  // Ocultar posibles botones internos duplicados (Continuar/Atrás/Siguiente)
-  document.querySelectorAll('main .btn').forEach(btn => {
-    const t = (btn.textContent||'').trim().toLowerCase();
-    if (['atrás','siguiente','continuar'].includes(t) && !btn.closest('.modal')){
-      if (btn.id !== 'btnNext' && btn.id !== 'btnConsultar') {
-        const wrap = btn.closest('.d-flex') || btn.parentElement;
-        if (wrap) wrap.style.display='none'; else btn.style.display='none';
-      }
+          </div>
+        </div>
+      </section>
+
+      <!-- Bloque: Usuario NO EXISTE (Registro) -->
+      <section class="card shadow-sm form-section mt-4" id="secNoExiste">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <h2 class="h5 mb-0">Mi información personal</h2>
+          <span class="badge text-bg-secondary">Nuevo aspirante</span>
+          </div>
+          <hr />
+          <div class="alert alert-secondary small" id="resumenDoc">Documento consultado: <span id="resTipoDoc"></span> –
+            <span id="resNumDoc"></span></div>
+          <div class="row g-3">
+            <!-- Identidad -->
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regFechaExp">Fecha expedición</label>
+              <input class="form-control" id="regFechaExp" required="" type="date" />
+              <div class="invalid-feedback">Selecciona una fecha válida.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regFechaNac">Fecha nacimiento</label>
+              <input class="form-control" id="regFechaNac" required="" type="date" />
+              <div class="invalid-feedback">Selecciona una fecha válida.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regLugarNac">Lugar de nacimiento (Ciudad)</label>
+              <input class="form-control" id="regLugarNac" placeholder="Ingrese su ciudad de nacimiento" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label icon-required" for="regPNombre">Primer nombre</label>
+              <input class="form-control" id="regPNombre" placeholder="Ingrese su primer nombre" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="regSNombre">Segundo nombre</label>
+              <input class="form-control" id="regSNombre" placeholder="Ingrese su segundo nombre (opcional)" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label icon-required" for="regPApellido">Primer apellido</label>
+              <input class="form-control" id="regPApellido" placeholder="Ingrese su primer apellido" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="regSApellido">Segundo apellido</label>
+              <input class="form-control" id="regSApellido" placeholder="Ingrese su segundo apellido (opcional)" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="regLibreta">Libreta militar</label>
+              <input class="form-control" id="regLibreta" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="regTel">Teléfono</label>
+              <input class="form-control" id="regTel" inputmode="numeric" pattern="\d{7,10}"
+                placeholder="Ej: 6041234567" />
+              <div class="form-text">Fijo: 7–10 dígitos.</div>
+              <div class="invalid-feedback">Ingrese solo números (7–10 dígitos).</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regCel">Número de celular</label>
+              <input class="form-control" id="regCel" inputmode="numeric" pattern="\d{10}" placeholder="Ej: 3001234567"
+                required="" />
+              <div class="form-text">10 dígitos.</div>
+              <div class="invalid-feedback">Ingrese solo números (10 dígitos).</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required">Tipo de transporte</label>
+              <div class="btn-group btn-toggle" role="group">
+                <input class="btn-check" id="transPart" name="transp" required="" type="radio" />
+                <label class="btn btn-outline-primary" for="transPart">Particular</label>
+                <input class="btn-check" id="transPub" name="transp" type="radio" />
+                <label class="btn btn-outline-primary" for="transPub">Público</label>
+              </div>
+              <div class="invalid-feedback d-block" id="transpError" style="display:none;">Selecciona una opción.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regEmail">Correo electrónico</label>
+              <input class="form-control" id="regEmail" placeholder="nombre@dominio.com" required="True" type="email" />
+              <div class="invalid-feedback">Formato de correo inválido.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regEmail2">Confirmar correo</label>
+              <input class="form-control" id="regEmail2" placeholder="Confirme su correo" required="True"
+                type="email" />
+              <div class="invalid-feedback">Debe coincidir con el correo anterior.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regEstadoCivil">Estado civil</label>
+              <select class="form-select" id="regEstadoCivil" required="">
+                <option disabled="" selected="" value="">Seleccionar...</option>
+                <option>Soltero(a)</option>
+                <option>Casado(a)</option>
+                <option>Unión libre</option>
+                <option>Divorciado(a)</option>
+                <option>Viudo(a)</option>
+              </select>
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regCiudad">Ciudad</label>
+              <input class="form-control" id="regCiudad" placeholder="Ingrese su ciudad de residencia" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regComuna">Comuna y barrio</label>
+              <input class="form-control" id="regComuna" placeholder="Ingrese su comuna y barrio" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-8">
+              <label class="form-label icon-required" for="regDir">Dirección</label>
+              <input class="form-control" id="regDir" placeholder="Ingrese su dirección completa" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label icon-required" for="regSexo">Sexo biológico</label>
+              <select class="form-select" id="regSexo" required="">
+                <option disabled="True" selected="True" value="">Seleccionar...</option>
+                <option>Masculino</option>
+                <option>Femenino</option>
+                <option>No Binario</option>
+              </select>
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+            <div class="col-md-8">
+              <label class="form-label icon-required" for="regEstrato">Estrato socioeconómico</label>
+              <select class="form-select" id="regEstrato" required="">
+                <option disabled="" selected="" value="">Seleccionar...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">¿Nacionalidad colombiana?</label>
+              <div aria-label="Nacionalidad" class="btn-group btn-toggle" role="group">
+                <input autocomplete="off" class="btn-check" id="nacSi1" name="nacCol" required="" type="radio" />
+                <label class="btn btn-outline-primary" for="nacSi1">Sí</label>
+                <input autocomplete="off" class="btn-check" id="nacNo1" name="nacCol" type="radio" />
+                <label class="btn btn-outline-primary" for="nacNo1">No</label>
+              </div>
+            </div>
+          </div>
+      </section>
+
+      <section class="card shadow-sm form-section mt-4" id="secDireNoExiste">
+        <div class="card-body">
+          <h2 class="h5 mb-0">Mi dirección</h2>
+          <hr />
+            
+            <div class="col-md-12">
+              <label class="form-label icon-required" for="regDir">Dirección</label>
+              <input class="form-control" id="regDir" placeholder="Ingrese su dirección completa" required="" />
+              <div class="invalid-feedback">Requerido.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <div>
+        <a class="btn btn-outline-secondary" href="mockup_paso1_educatic_bootstrap.html">Atrás</a>
+      </div>
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="d-flex gap-2">
+          <button class="btn btn-secondary" data-bs-target="#modalHabeas" data-bs-toggle="modal" type="button">
+            Ver contrato Autorización Habeas Data
+          </button>
+        </div>
+        <a class="btn btn-primary" href="mockup_paso2_educatic_bootstrap.html">Siguiente</a>
+      </div>
+    </div>
+
+    <div class="nav-bottom">
+      <button class="btn btn-outline-secondary" id="btnBack" type="button">Atrás</button>
+      <button class="btn btn-primary" disabled="" id="btnNext" type="button">Siguiente</button>
+    </div>
+  </main>
+  <footer class="disclaimer py-4 border-top">
+    <div class="container">
+      <div class="small text-muted mb-2">
+        <strong>Disclaimer:</strong> Este prototipo forma parte del modelo en la nube de EDUCATIC, disponible bajo
+        modalidad SaaS.
+        Su modernización tecnológica está incluida para los clientes con contrato vigente de soporte e infraestructura,
+        lo que les permite acceder a la última versión sin costos adicionales de actualización.
+      </div>
+      <div class="small text-end">2025© Todos los Derechos Reservados</div>
+      <div class="text-end mt-1">
+        <img alt="" border="0" src="https://clientes.educatic.com.co/sao/images/allrights.png" style="height:16px;" />
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Rutas
+    const routes = {
+      1: 'mockup_paso1_educatic_bootstrap.html',
+      2: 'mockup_paso2_educatic_bootstrap.html',
+      3: 'mockup_paso3_educatic_bootstrap.html',
+      4: 'mockup_paso4_educatic_bootstrap.html',
+      5: 'mockup_paso5_educatic_bootstrap.html',
+      6: 'mockup_paso6_educatic_bootstrap.html'
+    };
+    const step = 1;
+    const backBtn = document.getElementById('btnBack');
+    const nextBtn = document.getElementById('btnNext');
+    // Atrás
+    if (step === 1) {
+      backBtn.disabled = true;
+    } else {
+      backBtn.addEventListener('click', () => { window.location.href = routes[step - 1]; });
     }
-  });
-
-  // Estado inicial
-  function estadoInicial(){
-    if (secExiste) secExiste.classList.add('d-none');
-    if (secNoExiste) secNoExiste.classList.add('d-none');
-    nextBtn.disabled = true;
-  }
-  estadoInicial();
-
-  // Validación on-blur
-  document.addEventListener('blur', function(e){
-    const el = e.target;
-    if (!el.closest('form')) return;
-    if (el.hasAttribute('required')){
-      el.classList.toggle('is-invalid', !el.checkValidity());
-      el.classList.toggle('is-valid', el.checkValidity());
+    // Gate de avance
+    const form = document.querySelector('main form');
+    function getGateButton() {
+      return document.getElementById('btnContinuar') || document.getElementById('btnConfirmar');
     }
-  }, true);
-
-  // Solo dígitos para teléfono/celular
-  function onlyDigits(e){
-    const allowed = /[0-9]/;
-    if (e.inputType === 'insertText' && !allowed.test(e.data||'')){
-      e.target.value = e.target.value.replace(/\\D+/g,'');
-      e.preventDefault();
+    function canProceed() {
+      const gate = getGateButton();
+      if (gate) return !gate.disabled;
+      if (form) return form.checkValidity();
+      return true;
     }
-  }
-  ['regTel','regCel','numDoc'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el){ el.addEventListener('beforeinput', onlyDigits); }
-  });
-
-  // Emails iguales
-  const email = document.getElementById('regEmail');
-  const email2 = document.getElementById('regEmail2');
-  function validarEmailsIguales(){
-    if (!email || !email2) return true;
-    const ok = email.value && email2.value && email.value.trim() === email2.value.trim();
-    email2.classList.toggle('is-invalid', !ok);
-    return ok;
-  }
-  if (email2){ email2.addEventListener('input', validarEmailsIguales); if (email) email.addEventListener('input', validarEmailsIguales); }
-
-  // Habeas Data
-  let contratoAceptado = false;
-  const chkAcepto = document.getElementById('chkAceptoContrato') || document.getElementById('chkAcepto');
-  const btnAceptar = document.getElementById('btnAceptarContrato') || document.getElementById('btnAceptar');
-  if (chkAcepto && btnAceptar){
-    chkAcepto.addEventListener('change', ()=>{ btnAceptar.disabled = !chkAcepto.checked; });
-    btnAceptar.addEventListener('click', ()=>{ contratoAceptado = true; updateGate(); });
-  }
-
-  // Al consultar -> decidir flujo (par = existe)
-  btnConsultar.addEventListener('click', function(){
-    if (!tipoDoc.checkValidity()){ tipoDoc.classList.add('is-invalid'); return; }
-    if (!numDoc.checkValidity()){ numDoc.classList.add('is-invalid'); return; }
-    const valor = (numDoc.value||'').trim();
-    const existe = /^\d+$/.test(valor) && (parseInt(valor,10) % 2 === 0);
-    if (secExiste) secExiste.classList.toggle('d-none', !existe);
-    if (secNoExiste) secNoExiste.classList.toggle('d-none',  existe);
-    // Si no existe, mostrar resumen de doc/tipo
-    if (!existe){
-      const resTipo = document.getElementById('resTipoDoc'); const resNum = document.getElementById('resNumDoc');
-      if (resTipo && resNum){
-        resTipo.textContent = 'Tipo: ' + (tipoDoc.options[tipoDoc.selectedIndex]?.text || '');
-        resNum.textContent  = 'Número: ' + valor;
-      }
+    function updateNext() {
+      nextBtn.disabled = !canProceed();
     }
-    window.scrollTo({ top: (existe? secExiste.offsetTop : secNoExiste.offsetTop) - 20, behavior:'smooth' });
-    updateGate();
-  });
-
-  // Gate: habilitar Siguiente solo cuando corresponde
-  function updateGate(){
-    // ¿qué sección está activa?
-    const exVis = secExiste && !secExiste.classList.contains('d-none');
-    const noVis = secNoExiste && !secNoExiste.classList.contains('d-none');
-    let can = false;
-    if (exVis){
-      // Requiere nacionalidad (Si/No) y contrato
-      const nacSi = document.getElementById('nacSi'); const nacNo = document.getElementById('nacNo');
-      const nacOk = (nacSi && nacSi.checked) || (nacNo && nacNo.checked);
-      can = !!(nacOk && contratoAceptado);
-    } else if (noVis){
-      // Requiere formulario válido + emails iguales + contrato
-      const form = document.getElementById('formPaso1') || document.querySelector('main form');
-      const emailsOk = validarEmailsIguales();
-      can = !!(form && form.checkValidity() && emailsOk && contratoAceptado);
+    // Escuchar cambios del formulario y de los botones internos
+    document.addEventListener('input', updateNext, true);
+    document.addEventListener('change', updateNext, true);
+    document.addEventListener('keyup', updateNext, true);
+    // Si la página tiene un botón interno de continuar/confirmar, refleja su estado
+    const gate = getGateButton();
+    if (gate) {
+      const ro = new MutationObserver(updateNext);
+      ro.observe(gate, { attributes: true, attributeFilter: ['disabled', 'class'] });
     }
-    nextBtn.disabled = !can;
-  }
-
-  document.addEventListener('input', updateGate, true);
-  document.addEventListener('change', updateGate, true);
-
-  // Click en Siguiente: navegar al paso 2 (simula continuar)
-  nextBtn.addEventListener('click', ()=>{
-    if (!nextBtn.disabled){
-      window.location.href = 'mockup_paso2_educatic_bootstrap.html';
-    }
-  });
-})();
-</script><script>
-// --- Parche UX adicional (validaciones en vivo) ---
-(function(){
-  // Celular: marcar válido al llegar a 10 dígitos
-  const tel = document.getElementById('regTel');
-  const cel = document.getElementById('regCel');
-  function validateLen(inp, minLen, maxLen){
-    const v = (inp.value||'').replace(/\D+/g,'');
-    const ok = v.length >= minLen && v.length <= (maxLen||minLen);
-    inp.classList.toggle('is-invalid', !ok);
-    inp.classList.toggle('is-valid', ok);
-    // disparar re-evaluación del botón Siguiente
-    const evt = new Event('change', {bubbles:true});
-    inp.dispatchEvent(evt);
-  }
-  if (cel){
-    cel.addEventListener('input', ()=>validateLen(cel,10,10));
-  }
-  if (tel){
-    tel.addEventListener('input', ()=>validateLen(tel,7,10));
-  }
-
-  // Transporte: limpiar error al seleccionar
-  const tPart = document.getElementById('transPart') || document.getElementById('tPart');
-  const tPub  = document.getElementById('transPub')  || document.getElementById('tPub');
-  const transpError = document.getElementById('transpError');
-  function clearTranspError(){
-    if (transpError){ transpError.style.display = 'none'; }
-  }
-  if (tPart){ tPart.addEventListener('change', clearTranspError); }
-  if (tPub){  tPub.addEventListener('change', clearTranspError); }
-
-  // Remover/ocultar botón "Continuar" interno si aún existiera
- // ['btnContinuarExiste','btnContinuarNoExiste'].forEach(id=>{
-   // const b = document.getElementById(id);
-  //  if (b){ const wrap = b.closest('.d-flex') || b.parentElement; if (wrap) wrap.style.display='none'; else b.style.display='none'; }
-  //});
-
-  // Re-evaluar gating al aceptar Habeas Data (por si algún listener anterior no lo hacía)
-  const chkAcepto = document.getElementById('chkAceptoContrato') || document.getElementById('chkAcepto');
-  const btnAceptar = document.getElementById('btnAceptarContrato') || document.getElementById('btnAceptar');
-  if (chkAcepto && btnAceptar){
-    chkAcepto.addEventListener('change', ()=>{
-      const ok = chkAcepto.checked;
-      if (btnAceptar){ btnAceptar.disabled = !ok; }
+    // Inicial
+    updateNext();
+    // Click en Siguiente / Finalizar
+    nextBtn.addEventListener('click', () => {
+      if (!canProceed()) return;
+      const gate = getGateButton();
+      if (gate) gate.click(); // dispara lógica interna propia de la página
+      if (step === 6) { window.location.href = 'index.html'; }
+      else { window.location.href = routes[step + 1]; }
     });
-    btnAceptar.addEventListener('click', ()=>{
-      // generar un evento para que la lógica principal habilite "Siguiente" si corresponde
-      document.dispatchEvent(new Event('change', {bubbles:true}));
-    });
-  }
-})();
-</script><script>
-// --- Fix: Transporte y ocultar "Continuar" ---
-(function(){
-  const tPart = document.getElementById('transPart') || document.getElementById('tPart');
-  const tPub  = document.getElementById('transPub')  || document.getElementById('tPub');
-  const transpError = document.getElementById('transpError');
+  </script>
+  <div aria-hidden="true" class="modal fade" id="modalHabeas" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Autorización Habeas Data</h5>
+          <button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+        </div>
+        <div class="modal-body">
+          <p>Autorizo de manera previa, expresa e informada a EDUCATIC para tratar mis datos personales
+            conforme a su política de tratamiento, con las finalidades de gestión de procesos de admisión, contacto y
+            servicio.</p>
+          <div class="form-check mt-3">
+            <input class="form-check-input" id="chkAceptoContrato" type="checkbox" value="" />
+            <label class="form-check-label" for="chkAceptoContrato">He leído y acepto el contenido del contrato.</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal" disabled="" id="btnAceptarContrato"
+            type="button">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // ===== Lógica Paso 1 Unificada =====
+    (function () {
+      const secExiste = document.getElementById('secExiste');
+      const secNoExiste = document.getElementById('secNoExiste');
+      const secDireNoExiste = document.getElementById('secDireNoExiste');
+      const btnConsultar = document.getElementById('btnConsultar');
+      const tipoDoc = document.getElementById('tipoDoc');
+      const numDoc = document.getElementById('numDoc');
+      const nextBtn = document.getElementById('btnNext');
+      // Ocultar botón Atrás del shell en paso 1
+      const back = document.getElementById('btnBack'); if (back) back.style.display = 'none';
+      // Ocultar posibles botones internos duplicados (Continuar/Atrás/Siguiente)
+      document.querySelectorAll('main .btn').forEach(btn => {
+        const t = (btn.textContent || '').trim().toLowerCase();
+        if (['atrás', 'siguiente', 'continuar'].includes(t) && !btn.closest('.modal')) {
+          if (btn.id !== 'btnNext' && btn.id !== 'btnConsultar') {
+            const wrap = btn.closest('.d-flex') || btn.parentElement;
+            if (wrap) wrap.style.display = 'none'; else btn.style.display = 'none';
+          }
+        }
+      });
 
-  function hideTranspError(){
-    if (!transpError) return;
-    transpError.classList.remove('d-block');
-    transpError.classList.add('d-none');
-    transpError.style.display = 'none';
-    transpError.hidden = true;
-  }
-  if (tPart){ tPart.addEventListener('change', hideTranspError); }
-  if (tPub){  tPub.addEventListener('change', hideTranspError); }
+      // Estado inicial
+      function estadoInicial() {
+        if (secExiste) secExiste.classList.add('d-none');
+        if (secNoExiste) secNoExiste.classList.add('d-none');
+        if (secDireNoExiste) secDireNoExiste.classList.add('d-none');
+        nextBtn.disabled = true;
+      }
+      estadoInicial();
 
-  // Si ya viene seleccionado por alguna razón, oculta error al cargar
-  hideTranspError();
+      // Validación on-blur
+      document.addEventListener('blur', function (e) {
+        const el = e.target;
+        if (!el.closest('form')) return;
+        if (el.hasAttribute('required')) {
+          el.classList.toggle('is-invalid', !el.checkValidity());
+          el.classList.toggle('is-valid', el.checkValidity());
+        }
+      }, true);
 
-  // Ocultar cualquier botón con texto "Continuar"
-  document.querySelectorAll('main .btn').forEach(btn => {
-    const txt = (btn.textContent || '').trim().toLowerCase();
-    if (txt === 'continuar'){
-      const wrap = btn.closest('.d-flex') || btn.parentElement;
-      if (wrap) wrap.style.display='none'; else btn.style.display='none';
-    }
-  });
-})();
-</script></body>
+      // Solo dígitos para teléfono/celular
+      function onlyDigits(e) {
+        const allowed = /[0-9]/;
+        if (e.inputType === 'insertText' && !allowed.test(e.data || '')) {
+          e.target.value = e.target.value.replace(/\\D+/g, '');
+          e.preventDefault();
+        }
+      }
+      ['regTel', 'regCel', 'numDoc'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.addEventListener('beforeinput', onlyDigits); }
+      });
+
+      // Emails iguales
+      const email = document.getElementById('regEmail');
+      const email2 = document.getElementById('regEmail2');
+      function validarEmailsIguales() {
+        if (!email || !email2) return true;
+        const ok = email.value && email2.value && email.value.trim() === email2.value.trim();
+        email2.classList.toggle('is-invalid', !ok);
+        return ok;
+      }
+      if (email2) { email2.addEventListener('input', validarEmailsIguales); if (email) email.addEventListener('input', validarEmailsIguales); }
+
+      // Habeas Data
+      let contratoAceptado = false;
+      const chkAcepto = document.getElementById('chkAceptoContrato') || document.getElementById('chkAcepto');
+      const btnAceptar = document.getElementById('btnAceptarContrato') || document.getElementById('btnAceptar');
+      if (chkAcepto && btnAceptar) {
+        chkAcepto.addEventListener('change', () => { btnAceptar.disabled = !chkAcepto.checked; });
+        btnAceptar.addEventListener('click', () => { contratoAceptado = true; updateGate(); });
+      }
+
+      // Al consultar -> decidir flujo (par = existe)
+      btnConsultar.addEventListener('click', function () {
+        if (!tipoDoc.checkValidity()) { tipoDoc.classList.add('is-invalid'); return; }
+        if (!numDoc.checkValidity()) { numDoc.classList.add('is-invalid'); return; }
+        const valor = (numDoc.value || '').trim();
+        const existe = /^\d+$/.test(valor) && (parseInt(valor, 10) % 2 === 0);
+        if (secExiste) secExiste.classList.toggle('d-none', !existe);
+        if (secNoExiste) secNoExiste.classList.toggle('d-none', existe);
+        if (secDireNoExiste) secDireNoExiste.classList.toggle('d-none', existe);
+        // Si no existe, mostrar resumen de doc/tipo
+        if (!existe) {
+          const resTipo = document.getElementById('resTipoDoc'); const resNum = document.getElementById('resNumDoc');
+          if (resTipo && resNum) {
+            resTipo.textContent = 'Tipo: ' + (tipoDoc.options[tipoDoc.selectedIndex]?.text || '');
+            resNum.textContent = 'Número: ' + valor;
+          }
+        }
+        window.scrollTo({ top: (existe ? secExiste.offsetTop : secNoExiste.offsetTop) - 20, behavior: 'smooth' });
+        updateGate();
+      });
+
+      // Gate: habilitar Siguiente solo cuando corresponde
+      function updateGate() {
+        // ¿qué sección está activa?
+        const exVis = secExiste && !secExiste.classList.contains('d-none');
+        const noVis = secNoExiste && !secNoExiste.classList.contains('d-none');
+        let can = false;
+        if (exVis) {
+          // Requiere nacionalidad (Si/No) y contrato
+          const nacSi = document.getElementById('nacSi'); const nacNo = document.getElementById('nacNo');
+          const nacOk = (nacSi && nacSi.checked) || (nacNo && nacNo.checked);
+          can = !!(nacOk && contratoAceptado);
+        } else if (noVis) {
+          // Requiere formulario válido + emails iguales + contrato
+          const form = document.getElementById('formPaso1') || document.querySelector('main form');
+          const emailsOk = validarEmailsIguales();
+          can = !!(form && form.checkValidity() && emailsOk && contratoAceptado);
+        }
+        nextBtn.disabled = !can;
+      }
+
+      document.addEventListener('input', updateGate, true);
+      document.addEventListener('change', updateGate, true);
+
+      // Click en Siguiente: navegar al paso 2 (simula continuar)
+      nextBtn.addEventListener('click', () => {
+        if (!nextBtn.disabled) {
+          window.location.href = 'mockup_paso2_educatic_bootstrap.html';
+        }
+      });
+    })();
+  </script>
+  <script>
+    // --- Parche UX adicional (validaciones en vivo) ---
+    (function () {
+      // Celular: marcar válido al llegar a 10 dígitos
+      const tel = document.getElementById('regTel');
+      const cel = document.getElementById('regCel');
+      function validateLen(inp, minLen, maxLen) {
+        const v = (inp.value || '').replace(/\D+/g, '');
+        const ok = v.length >= minLen && v.length <= (maxLen || minLen);
+        inp.classList.toggle('is-invalid', !ok);
+        inp.classList.toggle('is-valid', ok);
+        // disparar re-evaluación del botón Siguiente
+        const evt = new Event('change', { bubbles: true });
+        inp.dispatchEvent(evt);
+      }
+      if (cel) {
+        cel.addEventListener('input', () => validateLen(cel, 10, 10));
+      }
+      if (tel) {
+        tel.addEventListener('input', () => validateLen(tel, 7, 10));
+      }
+
+      // Transporte: limpiar error al seleccionar
+      const tPart = document.getElementById('transPart') || document.getElementById('tPart');
+      const tPub = document.getElementById('transPub') || document.getElementById('tPub');
+      const transpError = document.getElementById('transpError');
+      function clearTranspError() {
+        if (transpError) { transpError.style.display = 'none'; }
+      }
+      if (tPart) { tPart.addEventListener('change', clearTranspError); }
+      if (tPub) { tPub.addEventListener('change', clearTranspError); }
+
+      // Remover/ocultar botón "Continuar" interno si aún existiera
+      // ['btnContinuarExiste','btnContinuarNoExiste'].forEach(id=>{
+      // const b = document.getElementById(id);
+      //  if (b){ const wrap = b.closest('.d-flex') || b.parentElement; if (wrap) wrap.style.display='none'; else b.style.display='none'; }
+      //});
+
+      // Re-evaluar gating al aceptar Habeas Data (por si algún listener anterior no lo hacía)
+      const chkAcepto = document.getElementById('chkAceptoContrato') || document.getElementById('chkAcepto');
+      const btnAceptar = document.getElementById('btnAceptarContrato') || document.getElementById('btnAceptar');
+      if (chkAcepto && btnAceptar) {
+        chkAcepto.addEventListener('change', () => {
+          const ok = chkAcepto.checked;
+          if (btnAceptar) { btnAceptar.disabled = !ok; }
+        });
+        btnAceptar.addEventListener('click', () => {
+          // generar un evento para que la lógica principal habilite "Siguiente" si corresponde
+          document.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      }
+    })();
+  </script>
+  <script>
+    // --- Fix: Transporte y ocultar "Continuar" ---
+    (function () {
+      const tPart = document.getElementById('transPart') || document.getElementById('tPart');
+      const tPub = document.getElementById('transPub') || document.getElementById('tPub');
+      const transpError = document.getElementById('transpError');
+
+      function hideTranspError() {
+        if (!transpError) return;
+        transpError.classList.remove('d-block');
+        transpError.classList.add('d-none');
+        transpError.style.display = 'none';
+        transpError.hidden = true;
+      }
+      if (tPart) { tPart.addEventListener('change', hideTranspError); }
+      if (tPub) { tPub.addEventListener('change', hideTranspError); }
+
+      // Si ya viene seleccionado por alguna razón, oculta error al cargar
+      hideTranspError();
+
+      // Ocultar cualquier botón con texto "Continuar"
+      document.querySelectorAll('main .btn').forEach(btn => {
+        const txt = (btn.textContent || '').trim().toLowerCase();
+        if (txt === 'continuar') {
+          const wrap = btn.closest('.d-flex') || btn.parentElement;
+          if (wrap) wrap.style.display = 'none'; else btn.style.display = 'none';
+        }
+      });
+    })();
+  </script>
+</body>
+
 </html>
